@@ -2,13 +2,11 @@
 
 public class RayCast_Pickup_Items : MonoBehaviour
 {
-
     private float range = 500f;
     public GameObject _HandImage;
     public GameObject _CrossHairImage;
     public Camera cam;
     public bool canHover = false;
-
     void Start()
     {
         _CrossHairImage.SetActive(true);
