@@ -284,7 +284,7 @@ GameObject:
   - 4: {fileID: 4000013595132220}
   - 114: {fileID: 114000010282458578}
   - 23: {fileID: 23000013145657334}
-  - 135: {fileID: 135000010628793894}
+  - 65: {fileID: 65000014137151064}
   m_Layer: 0
   m_Name: Matchbox
   m_TagString: Matchbox
@@ -551,7 +551,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013510593720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.323, y: 0.207, z: -0.082082}
+  m_LocalPosition: {x: 14.892, y: 76.113, z: 50.406}
   m_LocalScale: {x: 0.23606887, y: 0.23606904, z: 0.23606904}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -1083,6 +1083,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010845393796}
   m_Mesh: {fileID: 4300016, guid: 5acd0bc1ecd78c0498b495caaf615317, type: 3}
+--- !u!65 &65000014137151064
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013510593720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5, y: 7, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!108 &108000013753019206
 Light:
   m_ObjectHideFlags: 1
@@ -1144,18 +1156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
---- !u!135 &135000010628793894
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013510593720}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.03
-  m_Center: {x: 0.23, y: -0.06, z: -0.5}
 --- !u!135 &135000013799645128
 SphereCollider:
   m_ObjectHideFlags: 1

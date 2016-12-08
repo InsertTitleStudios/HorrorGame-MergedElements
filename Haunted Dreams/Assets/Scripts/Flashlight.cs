@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Flashlight : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class Flashlight : MonoBehaviour
 
     public GameObject _lowIntensityBeam;
     public GameObject _highIntensityBeam;
+    public float fillAmount;
+    public Image battery;
 
     void Start()
     {
@@ -45,6 +48,7 @@ public class Flashlight : MonoBehaviour
         flashlight.enabled = false;
         _currentBatteryPower = _maximumBatteryPower;
         _tempBatteryPower = _currentBatteryPower;
+        battery.fillAmount = _currentBatteryPower;
     }
     void Update()
     {
@@ -89,6 +93,7 @@ public class Flashlight : MonoBehaviour
         if (respawn == true)
         {
             _currentBatteryPower = _tempBatteryPower;
+            battery.fillAmount = _currentBatteryPower;
             respawn = false;
         }
     }
@@ -138,11 +143,13 @@ public class Flashlight : MonoBehaviour
         }
     }
     public void AddBattery(int _batteryPowerAmount)
-    { _currentBatteryPower += _batteryPowerAmount;
-
+    {
+        _currentBatteryPower += _batteryPowerAmount;
         if (_currentBatteryPower >= _maximumBatteryPower)
-        { _currentBatteryPower = _maximumBatteryPower; }
-
+        {
+            _currentBatteryPower = _maximumBatteryPower;
+            battery.fillAmount = _currentBatteryPower;
+        }
         // if (_batteryPickUp != null)
         //{ GetComponent<AudioSource>().clip = _batteryPickUp;
         //  GetComponent<AudioSource>().Play(); }}

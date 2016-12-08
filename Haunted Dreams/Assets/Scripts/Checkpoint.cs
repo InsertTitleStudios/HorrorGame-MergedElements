@@ -18,7 +18,7 @@ public class Checkpoint : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && inZone && levelManager.currentCheckpoint != gameObject)
+        if (Input.GetButtonDown("Fire1") && inZone && levelManager.currentCheckpoint != gameObject)
         {
             if (_currentMatches >= 1)
             {
