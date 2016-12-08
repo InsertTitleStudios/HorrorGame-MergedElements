@@ -7,16 +7,13 @@ public class Checkpoint : MonoBehaviour
     public static int tempMatches = 0;
     public int _Respawnedmatches;
     public bool inZone = false;
-    public Text matches_text;
-    public Text _HUD_Text;
-    public CanvasGroup canvasGroup = null;   
+    public Text matches_text; 
     public LevelManager levelManager;
     public bool respawn = false;
     void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
         matches_text.text = "X " + _currentMatches;
-        _HUD_Text.text = " ";
         tempMatches = _currentMatches;
     }
     void Update()
