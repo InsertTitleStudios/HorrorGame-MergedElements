@@ -1,0 +1,24 @@
+mouse - 	looking around/camera movement
+left click - 	Interact with objects
+right click - 	Zoom in
+wheel - 	change intensity
+
+
+W		Move Forward
+A		Strafe/Turn left
+S		Move Backwards
+D		strafe/turn right
+
+F		Flashlight on/off
+ctrl		crouching
+space 		jump and climb when flashlight is off
+shift		run
+
+E?
+Q?
+
+
+
+flashlight off, Izzy can climb ledges and ladders
+possible hiding spaces, lockers?
+map?
