@@ -35375,6 +35375,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 135000013799645128, guid: fa50c128dc913e04e805fdb078352c25,
+        type: 2}
+      propertyPath: m_Radius
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa50c128dc913e04e805fdb078352c25, type: 2}
   m_IsPrefabParent: 0
@@ -62074,6 +62079,11 @@ Prefab:
     - target: {fileID: 1000013510593720, guid: fa50c128dc913e04e805fdb078352c25, type: 2}
       propertyPath: m_Name
       value: Matchbox (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 135000013799645128, guid: fa50c128dc913e04e805fdb078352c25,
+        type: 2}
+      propertyPath: m_Radius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fa50c128dc913e04e805fdb078352c25, type: 2}
