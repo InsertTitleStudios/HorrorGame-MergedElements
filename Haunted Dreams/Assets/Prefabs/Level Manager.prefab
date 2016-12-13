@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011996755620}
-  - 114: {fileID: 114000014222308842}
+  - 114: {fileID: 114000013910396924}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000014222308842
+--- !u!114 &114000013910396924
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,7 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013832837578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5e7373e1d51a7d4d9d4ce360227b0fc, type: 3}
+  m_Script: {fileID: 11500000, guid: c08273c9e9a4e0242b37f589577cdb64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentCheckpoint: {fileID: 0}
+  match: {fileID: 0}
+  flashlight: {fileID: 0}
+  tempPickedUpMatches: []
+  tempPickedUpBatteries: []

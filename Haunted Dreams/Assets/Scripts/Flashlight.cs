@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Flashlight : MonoBehaviour
 {
@@ -8,9 +9,8 @@ public class Flashlight : MonoBehaviour
    // public AudioClip _batteryPickUp;
 
     public int _maximumBatteryPower = 1000;
-    public float _currentBatteryPower = 0f;
-
-    // 2 Modes of flashlight Low = small intensity short range, large angle. High = large intensity, small angle but longer range.
+    public static float _currentBatteryPower = 0f;
+    public static float _tempBatteryPower = 0f;
 
     public float _lowPowerIntensityMode = 3f;
     public float _lowPowerSpotAngle = 40f;
@@ -29,30 +29,41 @@ public class Flashlight : MonoBehaviour
     public float _maxFlickerSpeed = 1f;
     public float _minFlickerSpeed = 0.1f;
 
+    public bool respawn = false;
+    public LevelManager manager;
+    public bool checkpointActivated = false;
+
     public GameObject _lowIntensityBeam;
     public GameObject _highIntensityBeam;
+    public float fillAmount;
+    public Image battery;
 
-    // Use this for initialization
     void Start()
-    { flashlight = GetComponentInChildren<Light>();
+    {
+        flashlight = GetComponentInChildren<Light>();
         _lowIntensityBeam.GetComponent<GameObject>();
         _highIntensityBeam.GetComponent<GameObject>();
         _lowIntensityBeam.gameObject.SetActive(false);
         _highIntensityBeam.gameObject.SetActive(false);
-
         flashlight.enabled = false;
-        _currentBatteryPower = _maximumBatteryPower; }
-	
-	// Update is called once per frame
-	void Update ()
-    { _batteryBarLength = (Screen.width / 4) * (_currentBatteryPower / (float) _maximumBatteryPower);
-
+        _currentBatteryPower = _maximumBatteryPower;
+        _tempBatteryPower = _currentBatteryPower;
+        battery.fillAmount = _currentBatteryPower;
+    }
+    void Update()
+    {
+        _batteryBarLength = (Screen.width / 4) * (_currentBatteryPower / (float)_maximumBatteryPower);
         if (Input.GetButtonDown("Flashlight"))
         { //GetComponent<AudioSource>().PlayOneShot(_switch);
-            flashlight.enabled = !flashlight.enabled; }
-
+            flashlight.enabled = !flashlight.enabled;
+        }
         if (flashlight.enabled)
-        { FlashlightOn();
+        {
+            FlashlightOn();
+            if (checkpointActivated == true)
+            {
+                _tempBatteryPower = _currentBatteryPower;
+            }
             if (_modeChange == false)
             {
                 _lowIntensityBeam.gameObject.SetActive(true);
@@ -63,23 +74,33 @@ public class Flashlight : MonoBehaviour
                 _currentBatteryPower -= _highDrainBatterySpeed * Time.deltaTime;
             }
         }
-
         else if (!flashlight.enabled)
         {
             _lowIntensityBeam.gameObject.SetActive(false);
             _highIntensityBeam.gameObject.SetActive(false);
+            flashlight.intensity = _lowPowerIntensityMode;
+            flashlight.spotAngle = _lowPowerSpotAngle;
+            flashlight.range = _lowPowerRange;
             _modeChange = false;
         }
-
         if (_currentBatteryPower == 0)
-        { StopCoroutine("FlashlightModifier");
+        {
+            StopCoroutine("FlashlightModifier");
             flashlight.enabled = false;
             _lowIntensityBeam.gameObject.SetActive(false);
             _highIntensityBeam.gameObject.SetActive(false);
-        } }
 
+        }
+        if (respawn == true)
+        {
+            _currentBatteryPower = _tempBatteryPower;
+            battery.fillAmount = _currentBatteryPower;
+            respawn = false;
+        }
+    }
     private void FlashlightOn()
-    { if (flashlight.enabled)
+    {
+        if (flashlight.enabled)
         {
             if (Input.GetMouseButtonDown(1) && _modeChange == false)
             {
@@ -87,9 +108,8 @@ public class Flashlight : MonoBehaviour
                 flashlight.intensity = _highPowerIntensityMode;
                 flashlight.spotAngle = _highPowerSpotAngle;
                 flashlight.range = _highPowerRange;
-                 _lowIntensityBeam.gameObject.SetActive(false);
+                _lowIntensityBeam.gameObject.SetActive(false);
                 _highIntensityBeam.gameObject.SetActive(true);
-                
             }
             else if (Input.GetMouseButtonDown(1) && _modeChange == true)
             {
@@ -99,43 +119,54 @@ public class Flashlight : MonoBehaviour
                 flashlight.range = _lowPowerRange;
                 _lowIntensityBeam.gameObject.SetActive(true);
                 _highIntensityBeam.gameObject.SetActive(false);
-                
             }
         }
+        if (_currentBatteryPower <= 0)
+        { _currentBatteryPower = 0;
+            StopCoroutine("FlashlightModifier");
+            flashlight.enabled = false;
+        }
 
-        if (flashlight.enabled)
-        {  }
-
-        if(_currentBatteryPower <= 0)
-        { _currentBatteryPower = 0; }
-
-        if (_currentBatteryPower < 10)
+        if (_currentBatteryPower < 100)
         { StartCoroutine("FlashlightModifier"); }
 
-        if (_currentBatteryPower > 10)
-        { StopCoroutine("FlashlightModifier"); }}
+      /*  if (_currentBatteryPower <= 100 && Input.GetButtonDown("Flashlight"))
+        {
+            StopCoroutine("FlashlightModifier");
+            flashlight.enabled = false;
+        }
+        else if (_currentBatteryPower <= 100 && Input.GetButtonDown("Flashlight"))
+        {
+            StartCoroutine("FlashlightModifier");
+            flashlight.enabled = true;
+        }*/
 
+        if (_currentBatteryPower > 100)
+        { StopCoroutine("FlashlightModifier"); }
+    }
     IEnumerator FlashlightModifier()
-    { while (true)
-        { flashlight.enabled = true;
+    {
+        while (true)
+        {
+            flashlight.enabled = true;
             yield return new WaitForSeconds
                 (Random.Range(_minFlickerSpeed, _maxFlickerSpeed));
 
             flashlight.enabled = false;
             yield return new WaitForSeconds
-                (Random.Range(_minFlickerSpeed, _maxFlickerSpeed)); }}
-    
+                (Random.Range(_minFlickerSpeed, _maxFlickerSpeed));
+        }
+    }
     public void AddBattery(int _batteryPowerAmount)
-    { _currentBatteryPower += _batteryPowerAmount;
-
+    {
+        _currentBatteryPower += _batteryPowerAmount;
         if (_currentBatteryPower >= _maximumBatteryPower)
-        { _currentBatteryPower = _maximumBatteryPower; }
-
+        {
+            _currentBatteryPower = _maximumBatteryPower;
+            battery.fillAmount = _currentBatteryPower;
+        }
         // if (_batteryPickUp != null)
         //{ GetComponent<AudioSource>().clip = _batteryPickUp;
         //  GetComponent<AudioSource>().Play(); }}
-
-        //void OnGUI()           // Change this to latest GUI in unity
-        //{ GUI.Box(new Rect(5, 35, _batteryBarLength, 20), "Battery"); 
     }
 }
