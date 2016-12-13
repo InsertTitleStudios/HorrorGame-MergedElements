@@ -89,6 +89,7 @@ public class Flashlight : MonoBehaviour
             flashlight.enabled = false;
             _lowIntensityBeam.gameObject.SetActive(false);
             _highIntensityBeam.gameObject.SetActive(false);
+
         }
         if (respawn == true)
         {
@@ -121,12 +122,26 @@ public class Flashlight : MonoBehaviour
             }
         }
         if (_currentBatteryPower <= 0)
-        { _currentBatteryPower = 0; }
+        { _currentBatteryPower = 0;
+            StopCoroutine("FlashlightModifier");
+            flashlight.enabled = false;
+        }
 
-        if (_currentBatteryPower < 10)
+        if (_currentBatteryPower < 100)
         { StartCoroutine("FlashlightModifier"); }
 
-        if (_currentBatteryPower > 10)
+      /*  if (_currentBatteryPower <= 100 && Input.GetButtonDown("Flashlight"))
+        {
+            StopCoroutine("FlashlightModifier");
+            flashlight.enabled = false;
+        }
+        else if (_currentBatteryPower <= 100 && Input.GetButtonDown("Flashlight"))
+        {
+            StartCoroutine("FlashlightModifier");
+            flashlight.enabled = true;
+        }*/
+
+        if (_currentBatteryPower > 100)
         { StopCoroutine("FlashlightModifier"); }
     }
     IEnumerator FlashlightModifier()
