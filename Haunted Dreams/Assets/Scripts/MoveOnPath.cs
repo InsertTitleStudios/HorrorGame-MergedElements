@@ -39,5 +39,12 @@ public class MoveOnPath : MonoBehaviour {
         {
             _currentWayPointID = 0;
         }
+
+        //Setup Field of view and going to player's last position in this script.
+/*
+        if (distance >= reachDistance && _currentWayPointID == 7)
+        {
+            _currentWayPointID--;
+        }*/
 	}
 }
