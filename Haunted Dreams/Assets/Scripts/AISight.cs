@@ -10,7 +10,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character;
 
         public bool isBoss = false;
-        public int health = 3;
+        public int health = 1000;
+        public bool deductHealth = false;
         public enum State
         {
             PATROL,
@@ -47,6 +48,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             agent = GetComponent<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
+            target = GameObject.FindGameObjectWithTag("Player");
 
             agent.updatePosition = true;
             agent.updateRotation = false;
@@ -161,18 +163,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     state = AISight.State.STUNNED;
                 }
+                else
+                {
+                    state = AISight.State.PATROL;
+                }
             }
 
             else if (isBoss == false)
             {
                 if (coll.tag == "LowBeam")
                 {
-                    health--;
+                    deductHealth = true;
 
-                    if (health <= 0)
-                    {
-                        Destroy(gameObject);
-                    }
+                    
                 }
                 else if (coll.tag == "HighBeam")
                 {
@@ -182,7 +185,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        void FixedUPdate()
+        void FixedUpdate()
         {
             RaycastHit hit;
 
@@ -216,6 +219,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     target = hit.collider.gameObject;
                 }
             }
+
+            if (deductHealth)
+            {
+                health--;
+
+                
+                if (health <= 0)
+                {
+                    print("Deducting health" + health);
+                    health = 0;
+                    Destroy(gameObject);
+                }
+            }
+
         }
     }
 }
