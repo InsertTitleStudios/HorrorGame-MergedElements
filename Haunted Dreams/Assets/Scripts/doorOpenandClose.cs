@@ -29,61 +29,50 @@ public class doorOpenandClose : MonoBehaviour {
 		doorOpen = false;
 	
 	}
-	
-
-	void Update () { //The main function wich controlls how the system will work.
-
-		if (T_ActivatedOpen == true)
-			T_ActivatedClose = false;
-
-		else if (T_ActivatedClose == true)
-			T_ActivatedOpen = false;
-
-		if (activateTrigger && Input.GetKeyDown (KeyCode.E)) //For some reaseon you can't have both E (open and close).
-			{
-                AudioSource audio = GetComponent<AudioSource>();
-				textO.SetActive (false);
-				textC.SetActive (false);
-				T_ActivatedOpen = false;
-				T_ActivatedClose = true;
-				textO.SetActive (false);
-				textC.SetActive (true);
-                doorOpen = true;
-                audio.clip= Open;
-                audio.Play();
-                
 
 
-            if (doorOpen) 
-			{
-				doorOpen = true;
-				doorController ("Open");
-			}
-				
-			}
-			else if(T_ActivatedClose && activateTrigger && Input.GetKey (KeyCode.R)) 
-			{
+    void Update()
+    { //The main function wich controlls how the system will work.
+
+        if (T_ActivatedOpen == true)
+            T_ActivatedClose = false;
+
+        else if (T_ActivatedClose == true)
+            T_ActivatedOpen = false;
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            doorOpen = !doorOpen;
+        }
+
+
+        if (T_ActivatedOpen && activateTrigger && doorOpen) //For some reaseon you can't have both E (open and close).
+        {
+            AudioSource audio = GetComponent<AudioSource>();
+            textO.SetActive(false);
+            textC.SetActive(false);
+            T_ActivatedOpen = false;
+            T_ActivatedClose = true;
+            textO.SetActive(false);
+            textC.SetActive(true);
+            audio.clip = Open;
+            audio.Play();
+            doorController("Open");
+        }
+        else if (T_ActivatedClose && activateTrigger && !doorOpen)
+        {
             AudioSource audio = GetComponent<AudioSource>();
             T_ActivatedOpen = true;
-				T_ActivatedClose = false;
-				textO.SetActive (true);
-				textC.SetActive (false);
-                    audio.clip = Open;
-                    audio.Play();
-                    
-
-            if (doorOpen) 
-			{
-				doorOpen = false;
-				doorController ("Close");
-			}
-				
-			} 
-	}
-
-  
-
-														
+            T_ActivatedClose = false;
+            textO.SetActive(true);
+            textC.SetActive(false);
+            audio.clip = Open;
+            audio.Play();
+            doorController("Close");
+            Debug.Log("I have closed");
+        }
+    }
+													
 	void OnTriggerEnter(Collider col) //If you enter the trigger this will happen.
 	{
 		if(col.gameObject.tag == "Player")
@@ -114,6 +103,7 @@ public class doorOpenandClose : MonoBehaviour {
 	void doorController(string direction) //Animator function.
 	{
 		animator.SetTrigger(direction);
+        
 	}
 		
 }
