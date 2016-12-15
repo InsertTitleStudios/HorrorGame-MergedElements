@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0.26
+  m_AmbientIntensity: 3.27
   m_AmbientMode: 0
   m_SkyboxMaterial: {fileID: 2100000, guid: d07d2172e76d3fa429e80a14d2ae3616, type: 2}
   m_HaloStrength: 0.5
@@ -16726,9 +16726,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 564664096}
-  - 114: {fileID: 564664099}
-  - 65: {fileID: 564664098}
-  - 95: {fileID: 564664097}
   m_Layer: 0
   m_Name: Door033
   m_TagString: Untagged
@@ -16751,49 +16748,6 @@ Transform:
   - {fileID: 319837577}
   m_Father: {fileID: 472187317}
   m_RootOrder: 2
---- !u!95 &564664097
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 95000012270443102, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 564664095}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 577dadd6b3192d84f884a58dcc385776, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!65 &564664098
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65000013177127238, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 564664095}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.25, y: 1, z: 2.2}
-  m_Center: {x: -0.84, y: 0.56, z: 0}
---- !u!114 &564664099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000011855859902, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 564664095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e9b30eb519c9f4ea693b46088a1f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &574230943
 GameObject:
   m_ObjectHideFlags: 0
@@ -21408,9 +21362,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 775476825}
-  - 114: {fileID: 775476828}
-  - 95: {fileID: 775476827}
-  - 65: {fileID: 775476826}
   m_Layer: 0
   m_Name: Door035
   m_TagString: Untagged
@@ -21433,49 +21384,6 @@ Transform:
   - {fileID: 1338581074}
   m_Father: {fileID: 472187317}
   m_RootOrder: 0
---- !u!65 &775476826
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65000011590648218, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 775476824}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.31, y: 0.89, z: 2.6}
-  m_Center: {x: -0.67, y: 0.57, z: 0}
---- !u!95 &775476827
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 95000012286693450, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 775476824}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c12124279ba0bd24ea8e6f3b2a9090da, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &775476828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000010607774164, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 775476824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e9b30eb519c9f4ea693b46088a1f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &775762306
 GameObject:
   m_ObjectHideFlags: 0
@@ -35969,9 +35877,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1283083781}
-  - 114: {fileID: 1283083784}
-  - 95: {fileID: 1283083783}
-  - 65: {fileID: 1283083782}
   m_Layer: 0
   m_Name: Door009
   m_TagString: Untagged
@@ -35994,49 +35899,6 @@ Transform:
   - {fileID: 1159399920}
   m_Father: {fileID: 800678980}
   m_RootOrder: 6
---- !u!65 &1283083782
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65000011450372280, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1283083780}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.34, y: 1.56, z: 2.02}
-  m_Center: {x: -0.73, y: 1.15, z: 0}
---- !u!95 &1283083783
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 95000013057794952, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1283083780}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bdb805eec331d2f42986864e62d75931, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &1283083784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012427971542, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1283083780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e9b30eb519c9f4ea693b46088a1f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1286313818
 GameObject:
   m_ObjectHideFlags: 0
@@ -46638,9 +46500,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1583645185}
-  - 65: {fileID: 1583645188}
-  - 95: {fileID: 1583645187}
-  - 114: {fileID: 1583645186}
   m_Layer: 0
   m_Name: Door034
   m_TagString: Untagged
@@ -46663,49 +46522,6 @@ Transform:
   - {fileID: 407199047}
   m_Father: {fileID: 472187317}
   m_RootOrder: 1
---- !u!114 &1583645186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000012523490562, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1583645184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e9b30eb519c9f4ea693b46088a1f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &1583645187
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 95000011700821794, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1583645184}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2e20454bc0bb01441912615aa175c8fb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!65 &1583645188
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 65000011327713634, guid: 7e20eef79ef4900479adfbeb703d6111,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1583645184}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.11, y: 0.98, z: 3.16}
-  m_Center: {x: -0.69, y: 0.6, z: -0.05}
 --- !u!1 &1585290365
 GameObject:
   m_ObjectHideFlags: 0
