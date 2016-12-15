@@ -9,7 +9,6 @@ TagManager:
   - Matchbox
   - HighBeam
   - LowBeam
-  - Enemy
   - Waypoint
   layers:
   - Default

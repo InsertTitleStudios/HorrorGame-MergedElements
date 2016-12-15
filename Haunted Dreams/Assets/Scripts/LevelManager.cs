@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public List<BatteryPickUp> tempPickedUpBatteries;
     void Start()
     {
+        Application.targetFrameRate = 60;
         player = FindObjectOfType<FirstPersonController>();
         match = FindObjectOfType<Checkpoint>();
     }
@@ -20,7 +21,7 @@ public class LevelManager : MonoBehaviour
     {
         player.transform.position = currentCheckpoint.transform.position;
         match.respawn = true;
-      //  flashlight.respawn = true;
+       // flashlight.respawn = true;
         for (int i = tempPickedUpMatches.Count - 1; i >= 0; i--)
         {
             if (tempPickedUpMatches[i].checkpointActivated && tempPickedUpMatches[i].pickedUp)

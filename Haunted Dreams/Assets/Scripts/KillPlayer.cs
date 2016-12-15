@@ -19,21 +19,10 @@ public class KillPlayer : MonoBehaviour {
           playerHealth = 30; }}
 
     void OnCollisionEnter(Collision other) //Fix Collision - Doesn't work however health function works when done manually
-    {
-        if (other.gameObject.tag =="Small Enemy")
+    { if (other.gameObject.tag =="Small Enemy")
         { print("enemy just touched" + playerHealth);
-          playerHealth -= smallEnemyDamage;
-        }
-        if (other.gameObject.tag == "Enemy")
-        {
-            print("Enemy just touched" + playerHealth);
-            playerHealth -= smallEnemyDamage;
-        }
-    
-   
+          playerHealth -= smallEnemyDamage; }
 
      if (other.gameObject.tag == "Large Enemy")
         { print("enemy just touched" + playerHealth);
           playerHealth -= largeEnemyDamage; }}}
-
-
