@@ -9,11 +9,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public NavMeshAgent agent;
         public ThirdPersonCharacter character;
 
+        public bool isBoss = false;
+        public int health = 3;
         public enum State
         {
             PATROL,
             CHASE,
-            INVESTIGATE
+            INVESTIGATE,
+            STUNNED
         }
 
         public State state;
@@ -81,6 +84,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case State.INVESTIGATE:
                         Investigate();
                         break;
+
+                    case State.STUNNED:
+                        Stunned();
+                        break;
                 }
                 yield return null;
             }
@@ -95,8 +102,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
             else if (Vector3.Distance(this.transform.position, waypoints[waypointInd].transform.position) <= 2)
             {
-
-
                 if (isRandom == true)
                 {
                     waypointInd = Random.Range(0, waypoints.Length);
@@ -136,12 +141,44 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }          
         }
 
+        void Stunned()
+        {
+            character.Move(Vector3.zero, false, false); ;
+        }
+
         void OnTriggerEnter(Collider coll)
         {
+
             if (coll.tag == "Player")
             {
                 state = AISight.State.INVESTIGATE;
                 investigateSpot = coll.gameObject.transform.position;
+            }
+
+            if (isBoss == true)
+            {
+                if (coll.tag == "HighBeam")
+                {
+                    state = AISight.State.STUNNED;
+                }
+            }
+
+            else if (isBoss == false)
+            {
+                if (coll.tag == "LowBeam")
+                {
+                    health--;
+
+                    if (health <= 0)
+                    {
+                        Destroy(gameObject);
+                    }
+                }
+                else if (coll.tag == "HighBeam")
+                {
+                    health = 0;
+                    Destroy(gameObject);
+                }
             }
         }
 
