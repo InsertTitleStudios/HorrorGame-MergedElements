@@ -4,9 +4,9 @@ using System.Collections;
 public class KillPlayer : MonoBehaviour {
 
     public LevelManager levelManager;
-    public int playerHealth = 30;
-    private int smallEnemyDamage = 10;
-    private int largeEnemyDamage = 30;
+    public int playerHealth = 250;
+    private int smallEnemyDamage = 1;
+    private int largeEnemyDamage = 250;
 
     void Start()
     {
@@ -16,9 +16,9 @@ public class KillPlayer : MonoBehaviour {
     { if (playerHealth <= 0)
         { playerHealth = 0;
           levelManager.RespawnPlayer();
-          playerHealth = 30; }}
+          playerHealth = 250; }}
 
-    void OnCollisionEnter(Collision other) //Fix Collision - Doesn't work however health function works when done manually
+    void OnCollisionStay(Collision other) //Fix Collision - Doesn't work however health function works when done manually
     { if (other.gameObject.tag =="Small Enemy")
         { print("enemy just touched" + playerHealth);
           playerHealth -= smallEnemyDamage; }

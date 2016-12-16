@@ -12,6 +12,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool isBoss = false;
         public int health = 1000;
         public bool deductHealth = false;
+        public KillPlayer player;
         public enum State
         {
             PATROL,
@@ -155,6 +156,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 state = AISight.State.INVESTIGATE;
                 investigateSpot = coll.gameObject.transform.position;
+              
             }
 
             if (isBoss == true)
