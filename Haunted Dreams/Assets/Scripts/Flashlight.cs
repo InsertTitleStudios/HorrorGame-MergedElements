@@ -156,30 +156,9 @@ public class Flashlight : MonoBehaviour
 
         if (_currentBatteryPower < 50)
         {
-            // Start
-            
+ 
             StartCoroutine("FlashlightModifier");
             start = true;
-
-         /*   if (Input.GetButtonDown("Flashlight") && start == true)
-            {
-                Debug.Log("Battery is below 50 but I'm gonna turn off flashlight, Corountine will be stopped");
-                StopCoroutine("FlashlightModifier");
-                start = false;
-            }
-            else if (Input.GetButtonDown("Flashlight") && start == false)
-            {
-                Debug.Log("Battery is below 50 but I'm gonna turn on flashlight, Corountine will be resumed");
-                StartCoroutine("FlashlightModifier");
-                start = true;
-            }
-            else
-            {
-               // StartCoroutine("FlashlightModifier");
-            }
-
-    */
-           
         }
 
         if (_currentBatteryPower > 50)
