@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BatteryPickUp : MonoBehaviour
 {
-    public int _batteryPowerAmount = 50;
+    public static int _batteryPowerAmount = 100;
     public LevelManager list;
     public bool pickedUp;
     public bool checkpointActivated;

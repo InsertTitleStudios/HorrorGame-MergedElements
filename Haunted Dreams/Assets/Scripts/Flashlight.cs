@@ -8,7 +8,7 @@ public class Flashlight : MonoBehaviour
     //public AudioClip _switch;
    // public AudioClip _batteryPickUp;
 
-    public int _maximumBatteryPower = 1000;
+    public static int _maximumBatteryPower = 150;
     public static float _currentBatteryPower = 0f;
     public static float _tempBatteryPower = 0f;
 
@@ -32,11 +32,13 @@ public class Flashlight : MonoBehaviour
     public bool respawn = false;
     public LevelManager manager;
     public bool checkpointActivated = false;
+    public Text batteryPower;
 
     public GameObject _lowIntensityBeam;
     public GameObject _highIntensityBeam;
     public float fillAmount;
     public Image battery;
+    public bool start = false;
 
     void Start()
     {
@@ -49,17 +51,46 @@ public class Flashlight : MonoBehaviour
         _currentBatteryPower = _maximumBatteryPower;
         _tempBatteryPower = _currentBatteryPower;
         battery.fillAmount = _currentBatteryPower;
+        batteryPower.text = " " + _currentBatteryPower;
     }
     void Update()
     {
-        _batteryBarLength = (Screen.width / 4) * (_currentBatteryPower / (float)_maximumBatteryPower);
+        batteryPower.text = " " + _currentBatteryPower;
         if (Input.GetButtonDown("Flashlight"))
         { //GetComponent<AudioSource>().PlayOneShot(_switch);
             flashlight.enabled = !flashlight.enabled;
+            Debug.Log("Activated");
+            
         }
+
+        if (Input.GetButtonDown("Flashlight") && _currentBatteryPower <= 0)
+        {
+            flashlight.enabled = false;
+            Debug.Log("I have no power so I won't turn on");
+            StopAllCoroutines();
+
+        }
+
+        if (Input.GetButtonDown("Flashlight") && _currentBatteryPower <= 50 && start == true)
+        {
+            start = false;
+            StopCoroutine("FlashlightModifier");
+            Debug.Log("Wax off");
+        }
+
+        else if (Input.GetButtonDown("Flashlight") && _currentBatteryPower <= 50 && start == false)
+        {
+            start = true;
+            StartCoroutine("FlashlightModifier");
+            Debug.Log("Wax on");
+        }
+
+
         if (flashlight.enabled)
         {
+           
             FlashlightOn();
+            batteryPower.text = " " + _currentBatteryPower;
             if (checkpointActivated == true)
             {
                 _tempBatteryPower = _currentBatteryPower;
@@ -68,6 +99,7 @@ public class Flashlight : MonoBehaviour
             {
                 _lowIntensityBeam.gameObject.SetActive(true);
                 _currentBatteryPower -= _lowDrainBatterySpeed * Time.deltaTime;
+
             }
             else if (_modeChange == true)
             {
@@ -83,9 +115,10 @@ public class Flashlight : MonoBehaviour
             flashlight.range = _lowPowerRange;
             _modeChange = false;
         }
-        if (_currentBatteryPower == 0)
+        if (_currentBatteryPower <= 0)
         {
             StopCoroutine("FlashlightModifier");
+            _currentBatteryPower = 0;
             flashlight.enabled = false;
             _lowIntensityBeam.gameObject.SetActive(false);
             _highIntensityBeam.gameObject.SetActive(false);
@@ -120,14 +153,41 @@ public class Flashlight : MonoBehaviour
                 _highIntensityBeam.gameObject.SetActive(false);
             }
         }
-        if (_currentBatteryPower <= 0)
-        { _currentBatteryPower = 0; }
 
-        if (_currentBatteryPower < 10)
-        { StartCoroutine("FlashlightModifier"); }
+        if (_currentBatteryPower < 50)
+        {
+            // Start
+            
+            StartCoroutine("FlashlightModifier");
+            start = true;
 
-        if (_currentBatteryPower > 10)
-        { StopCoroutine("FlashlightModifier"); }
+         /*   if (Input.GetButtonDown("Flashlight") && start == true)
+            {
+                Debug.Log("Battery is below 50 but I'm gonna turn off flashlight, Corountine will be stopped");
+                StopCoroutine("FlashlightModifier");
+                start = false;
+            }
+            else if (Input.GetButtonDown("Flashlight") && start == false)
+            {
+                Debug.Log("Battery is below 50 but I'm gonna turn on flashlight, Corountine will be resumed");
+                StartCoroutine("FlashlightModifier");
+                start = true;
+            }
+            else
+            {
+               // StartCoroutine("FlashlightModifier");
+            }
+
+    */
+           
+        }
+
+        if (_currentBatteryPower > 50)
+        {
+            //  startCoroutine = false;
+            start = false;
+            StopCoroutine("FlashlightModifier");
+        }
     }
     IEnumerator FlashlightModifier()
     {
@@ -149,6 +209,7 @@ public class Flashlight : MonoBehaviour
         {
             _currentBatteryPower = _maximumBatteryPower;
             battery.fillAmount = _currentBatteryPower;
+            batteryPower.text = " " + _currentBatteryPower;
         }
         // if (_batteryPickUp != null)
         //{ GetComponent<AudioSource>().clip = _batteryPickUp;
