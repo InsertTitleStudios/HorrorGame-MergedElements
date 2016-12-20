@@ -6,7 +6,7 @@ public class Flashlight : MonoBehaviour
 {
     private Light flashlight;
     //public AudioClip _switch;
-   // public AudioClip _batteryPickUp;
+    // public AudioClip _batteryPickUp;
 
     public static int _maximumBatteryPower = 150;
     public static float _currentBatteryPower = 0f;
@@ -38,7 +38,9 @@ public class Flashlight : MonoBehaviour
     public GameObject _highIntensityBeam;
     public float fillAmount;
     public Image battery;
-    public bool start = false;
+    public bool pause = false;
+    public bool dead = false;
+    public bool dying = false;
 
     void Start()
     {
@@ -60,68 +62,32 @@ public class Flashlight : MonoBehaviour
         { //GetComponent<AudioSource>().PlayOneShot(_switch);
             flashlight.enabled = !flashlight.enabled;
             Debug.Log("Activated");
-            
+            if (dead && _currentBatteryPower <= 0)
+            {
+                Dead();
+            }
+
+            if (pause && _currentBatteryPower <= 50)
+            {
+                flashlight.enabled = false;
+                StopCoroutine("FlashlightModifier");
+                pause = false;
+            }
         }
-
-        if (Input.GetButtonDown("Flashlight") && _currentBatteryPower <= 0)
-        {
-            flashlight.enabled = false;
-            Debug.Log("I have no power so I won't turn on");
-            StopAllCoroutines();
-
-        }
-
-        if (Input.GetButtonDown("Flashlight") && _currentBatteryPower <= 50 && start == true)
-        {
-            start = false;
-            StopCoroutine("FlashlightModifier");
-            Debug.Log("Wax off");
-        }
-
-        else if (Input.GetButtonDown("Flashlight") && _currentBatteryPower <= 50 && start == false)
-        {
-            start = true;
-            StartCoroutine("FlashlightModifier");
-            Debug.Log("Wax on");
-        }
-
-
         if (flashlight.enabled)
         {
-           
             FlashlightOn();
+            PowerCheck();
             batteryPower.text = " " + _currentBatteryPower;
             if (checkpointActivated == true)
             {
                 _tempBatteryPower = _currentBatteryPower;
             }
-            if (_modeChange == false)
-            {
-                _lowIntensityBeam.gameObject.SetActive(true);
-                _currentBatteryPower -= _lowDrainBatterySpeed * Time.deltaTime;
-
-            }
-            else if (_modeChange == true)
-            {
-                _currentBatteryPower -= _highDrainBatterySpeed * Time.deltaTime;
-            }
+            ModeCheck();
         }
         else if (!flashlight.enabled)
         {
-            _lowIntensityBeam.gameObject.SetActive(false);
-            _highIntensityBeam.gameObject.SetActive(false);
-            flashlight.intensity = _lowPowerIntensityMode;
-            flashlight.spotAngle = _lowPowerSpotAngle;
-            flashlight.range = _lowPowerRange;
-            _modeChange = false;
-        }
-        if (_currentBatteryPower <= 0)
-        {
-            StopCoroutine("FlashlightModifier");
-            _currentBatteryPower = 0;
-            flashlight.enabled = false;
-            _lowIntensityBeam.gameObject.SetActive(false);
-            _highIntensityBeam.gameObject.SetActive(false);
+            FlashlightOff();           
         }
         if (respawn == true)
         {
@@ -130,43 +96,91 @@ public class Flashlight : MonoBehaviour
             respawn = false;
         }
     }
-    private void FlashlightOn()
+    
+    private void Dying()
     {
-        if (flashlight.enabled)
+        if (dying)
         {
-            if (Input.GetMouseButtonDown(1) && _modeChange == false)
-            {
-                _modeChange = true;
-                flashlight.intensity = _highPowerIntensityMode;
-                flashlight.spotAngle = _highPowerSpotAngle;
-                flashlight.range = _highPowerRange;
-                _lowIntensityBeam.gameObject.SetActive(false);
-                _highIntensityBeam.gameObject.SetActive(true);
-            }
-            else if (Input.GetMouseButtonDown(1) && _modeChange == true)
-            {
-                _modeChange = false;
-                flashlight.intensity = _lowPowerIntensityMode;
-                flashlight.spotAngle = _lowPowerSpotAngle;
-                flashlight.range = _lowPowerRange;
-                _lowIntensityBeam.gameObject.SetActive(true);
-                _highIntensityBeam.gameObject.SetActive(false);
-            }
+            Debug.Log("Dying");
+            pause = true;
+            StartCoroutine("FlashlightModifier");          
         }
-
-        if (_currentBatteryPower < 50)
+        else
         {
- 
-            StartCoroutine("FlashlightModifier");
-            start = true;
-        }
-
-        if (_currentBatteryPower > 50)
-        {
-            //  startCoroutine = false;
-            start = false;
+            Debug.Log("Living");
             StopCoroutine("FlashlightModifier");
         }
+    }
+    private void ModeCheck()
+    {
+        if (!_modeChange)
+        {
+            _lowIntensityBeam.gameObject.SetActive(true);
+            _currentBatteryPower -= _lowDrainBatterySpeed * Time.deltaTime;
+        }
+        else if (_modeChange)
+        {
+            _currentBatteryPower -= _highDrainBatterySpeed * Time.deltaTime;
+        }
+    }
+    private void Dead()
+    {
+        Debug.Log("In Dead Method");
+        dying = false;
+        Debug.Log("Dead is: " + dead);
+        flashlight.enabled = false;
+        StopCoroutine("FlashlightModifier");
+        _lowIntensityBeam.gameObject.SetActive(false);
+        _highIntensityBeam.gameObject.SetActive(false);
+        _currentBatteryPower = 0;
+    }
+    private void PowerCheck()
+    {
+        if (_currentBatteryPower < 50)
+        {
+            dying = true;
+            Dying();
+        }
+        else if (_currentBatteryPower > 50)
+        {
+            dying = false;
+            Dying();
+        }
+        else if (_currentBatteryPower <= 0)
+        {
+            dead = true;
+            Dead();
+        }
+    }
+    private void FlashlightOn()
+    {
+        if (Input.GetMouseButtonDown(1) && !_modeChange)
+        {
+            _modeChange = true;
+            flashlight.intensity = _highPowerIntensityMode;
+            flashlight.spotAngle = _highPowerSpotAngle;
+            flashlight.range = _highPowerRange;
+            _lowIntensityBeam.gameObject.SetActive(false);
+            _highIntensityBeam.gameObject.SetActive(true);
+        }
+        else if (Input.GetMouseButtonDown(1) && _modeChange)
+        {
+            _modeChange = false;
+            flashlight.intensity = _lowPowerIntensityMode;
+            flashlight.spotAngle = _lowPowerSpotAngle;
+            flashlight.range = _lowPowerRange;
+            _lowIntensityBeam.gameObject.SetActive(true);
+            _highIntensityBeam.gameObject.SetActive(false);
+        }
+    }
+    private void FlashlightOff()
+    {
+        _lowIntensityBeam.gameObject.SetActive(false);
+        _highIntensityBeam.gameObject.SetActive(false);
+        flashlight.intensity = _lowPowerIntensityMode;
+        flashlight.spotAngle = _lowPowerSpotAngle;
+        flashlight.range = _lowPowerRange;
+        _modeChange = false;
     }
     IEnumerator FlashlightModifier()
     {

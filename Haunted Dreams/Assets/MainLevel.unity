@@ -64762,7 +64762,7 @@ MonoBehaviour:
   _lowPowerIntensityMode: 3
   _lowPowerSpotAngle: 40
   _lowPowerRange: 20
-  _highPowerIntensityMode: 10
+  _highPowerIntensityMode: 50
   _highPowerSpotAngle: 20
   _highPowerRange: 30
   _lowDrainBatterySpeed: 2.5
@@ -64779,7 +64779,9 @@ MonoBehaviour:
   _highIntensityBeam: {fileID: 410152429}
   fillAmount: 0
   battery: {fileID: 595411553}
-  start: 0
+  pause: 0
+  dead: 0
+  dying: 0
 --- !u!4 &2021373480 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
