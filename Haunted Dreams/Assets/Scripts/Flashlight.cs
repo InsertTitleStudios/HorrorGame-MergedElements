@@ -66,7 +66,6 @@ public class Flashlight : MonoBehaviour
             {
                 Dead();
             }
-
             if (pause && _currentBatteryPower <= 50)
             {
                 flashlight.enabled = false;
@@ -95,8 +94,7 @@ public class Flashlight : MonoBehaviour
             battery.fillAmount = _currentBatteryPower;
             respawn = false;
         }
-    }
-    
+    }  
     private void Dying()
     {
         if (dying)
