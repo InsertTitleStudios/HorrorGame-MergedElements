@@ -41,6 +41,7 @@ public class Flashlight : MonoBehaviour
     public bool pause = false;
     public bool dead = false;
     public bool dying = false;
+    public bool flicker = false;
 
     void Start()
     {
@@ -70,6 +71,8 @@ public class Flashlight : MonoBehaviour
             {
                 flashlight.enabled = false;
                 StopCoroutine("FlashlightModifier");
+                //flicker = false;
+                //Flicker();
                 pause = false;
             }
         }
@@ -101,13 +104,18 @@ public class Flashlight : MonoBehaviour
         {
             Debug.Log("Dying");
             pause = true;
-            StartCoroutine("FlashlightModifier");          
+            StartCoroutine("FlashlightModifier"); 
+            //flicker = true;         
+            //Flicker();
         }
         else
         {
             Debug.Log("Living");
             StopCoroutine("FlashlightModifier");
+            //flicker = false;
+            //Flicker();
         }
+        //Flicker();
     }
     private void ModeCheck()
     {
@@ -128,10 +136,26 @@ public class Flashlight : MonoBehaviour
         Debug.Log("Dead is: " + dead);
         flashlight.enabled = false;
         StopCoroutine("FlashlightModifier");
+        //flicker = false;
+        //Flicker();
         _lowIntensityBeam.gameObject.SetActive(false);
         _highIntensityBeam.gameObject.SetActive(false);
         _currentBatteryPower = 0;
     }
+   /* private void Flicker()
+    {
+        if (flicker)
+        {
+            StartCoroutine("FlashlightModifier");
+        }
+        else
+        {
+            StopCoroutine("FlashlightModifier");
+        }
+
+    }*/
+
+
     private void PowerCheck()
     {
         if (_currentBatteryPower < 50)
@@ -206,4 +230,6 @@ public class Flashlight : MonoBehaviour
         //{ GetComponent<AudioSource>().clip = _batteryPickUp;
         //  GetComponent<AudioSource>().Play(); }}
     }
+
+    
 }

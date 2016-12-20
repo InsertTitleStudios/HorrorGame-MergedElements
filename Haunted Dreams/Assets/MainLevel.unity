@@ -64782,6 +64782,7 @@ MonoBehaviour:
   pause: 0
   dead: 0
   dying: 0
+  flicker: 0
 --- !u!4 &2021373480 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
