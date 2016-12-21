@@ -25,12 +25,12 @@ public class Flashlight : MonoBehaviour
     public float _highDrainBatterySpeed = 5f;
 
     public float _batteryBarLength;
-    public bool _modeChange = false;
+    
 
     public float _maxFlickerSpeed = 1f;
     public float _minFlickerSpeed = 0.1f;
 
-    public bool respawn = false;
+    
     public LevelManager manager;
     public bool checkpointActivated = false;
     public Text batteryPower;
@@ -39,10 +39,12 @@ public class Flashlight : MonoBehaviour
     public GameObject _highIntensityBeam;
     public float fillAmount;
     public Image battery;
-    public bool pause = false;
-    public bool dead = false;
-    public bool dying = false;
+    public bool _modeChange = false;
+    public bool _pause = false;
+    public bool _batteryDead = false;
+    public bool _batteryDying = false;
     public bool flicker = false;
+    public bool respawn = false;
 
     void Start()
     {
@@ -65,16 +67,16 @@ public class Flashlight : MonoBehaviour
             GetComponent<AudioSource>().PlayOneShot(_switch);
             flashlight.enabled = !flashlight.enabled;
             Debug.Log("Activated");
-            if (dead && _currentBatteryPower <= 0)
+            if (_batteryDead && _currentBatteryPower <= 0)
             {
                 Dead();
             }
-            if (pause && _currentBatteryPower <= 50)
+            if (_pause && _currentBatteryPower <= 50)
             {
                 flashlight.enabled = false;
                 flicker = false;
                 Flicker();
-                pause = false;
+                _pause = false;
             }
         }
         if (flashlight.enabled)
@@ -102,9 +104,9 @@ public class Flashlight : MonoBehaviour
     }  
     private void Dying()
     {
-        if (dying)
+        if (_batteryDying)
         {
-            pause = true;        
+            _pause = true;        
             flicker = true;         
         }
         else
@@ -128,8 +130,8 @@ public class Flashlight : MonoBehaviour
     private void Dead()
     {
         Debug.Log("In Dead Method");
-        dying = false;
-        Debug.Log("Dead is: " + dead);
+        _batteryDying = false;
+        Debug.Log("Dead is: " + _batteryDead);
         flashlight.enabled = false;
         flicker = false;
         Flicker();
@@ -152,18 +154,18 @@ public class Flashlight : MonoBehaviour
     {
         if (_currentBatteryPower < 50)
         {
-            dying = true;
+            _batteryDying = true;
             Dying();
         }
         if (_currentBatteryPower > 50)
         {
-            dying = false;
+            _batteryDying = false;
             Dying();
         }
         if (_currentBatteryPower < 0) // Only works if IF statment not Else IF statement
         {
             Debug.Log("I'm in this statement");
-            dead = true;
+            _batteryDead = true;
             _currentBatteryPower = 0;
             Dead();
         }
