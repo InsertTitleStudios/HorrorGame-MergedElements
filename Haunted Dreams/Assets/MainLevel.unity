@@ -335,7 +335,7 @@ GameObject:
   - 64: {fileID: 6406342}
   m_Layer: 0
   m_Name: Wall024
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -788,7 +788,7 @@ GameObject:
   - 64: {fileID: 21874297}
   m_Layer: 0
   m_Name: Wall029
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -2700,7 +2700,7 @@ GameObject:
   - 64: {fileID: 93997591}
   m_Layer: 0
   m_Name: Wall015
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -2867,7 +2867,7 @@ GameObject:
   - 64: {fileID: 95383198}
   m_Layer: 0
   m_Name: Wall030
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -3578,7 +3578,7 @@ GameObject:
   - 64: {fileID: 127288036}
   m_Layer: 0
   m_Name: Wall019
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7739,7 +7739,7 @@ GameObject:
   - 64: {fileID: 240997802}
   m_Layer: 0
   m_Name: Wall006
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -11160,7 +11160,7 @@ GameObject:
   - 64: {fileID: 376799250}
   m_Layer: 0
   m_Name: Wall013
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -12228,6 +12228,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: f8c534650a78bab44bf9946282f1a5d2, type: 3}
+--- !u!114 &410152432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 410152429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9095f297ad6dfbe458029801728d5268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!1001 &410749691
 Prefab:
   m_ObjectHideFlags: 0
@@ -13741,7 +13753,7 @@ GameObject:
   - 64: {fileID: 472187318}
   m_Layer: 0
   m_Name: Wall034
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -16072,7 +16084,7 @@ GameObject:
   - 64: {fileID: 531891071}
   m_Layer: 0
   m_Name: Wall020
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -18215,7 +18227,7 @@ GameObject:
   - 64: {fileID: 604224232}
   m_Layer: 0
   m_Name: Wall036
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -18465,7 +18477,7 @@ GameObject:
   - 64: {fileID: 616501315}
   m_Layer: 0
   m_Name: Wall012
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -18717,7 +18729,7 @@ GameObject:
   - 64: {fileID: 626713442}
   m_Layer: 0
   m_Name: Wall010
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19177,7 +19189,7 @@ GameObject:
   - 64: {fileID: 654050151}
   m_Layer: 0
   m_Name: Wall035
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -19692,7 +19704,7 @@ GameObject:
   - 64: {fileID: 688240019}
   m_Layer: 0
   m_Name: Wall025
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -25697,7 +25709,7 @@ GameObject:
   - 64: {fileID: 800678981}
   m_Layer: 0
   m_Name: Wall002
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28759,7 +28771,7 @@ GameObject:
   - 64: {fileID: 939923080}
   m_Layer: 0
   m_Name: Wall018
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -32995,7 +33007,7 @@ GameObject:
   - 64: {fileID: 1115044090}
   m_Layer: 0
   m_Name: Wall022
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -33478,7 +33490,7 @@ GameObject:
   - 64: {fileID: 1124065550}
   m_Layer: 0
   m_Name: Wall028
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -34032,7 +34044,7 @@ GameObject:
   - 64: {fileID: 1151262480}
   m_Layer: 0
   m_Name: Wall008
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -35153,7 +35165,7 @@ GameObject:
   - 64: {fileID: 1187143141}
   m_Layer: 0
   m_Name: Wall009
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -39816,7 +39828,7 @@ GameObject:
   - 64: {fileID: 1320274392}
   m_Layer: 0
   m_Name: Wall027
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -44332,7 +44344,7 @@ GameObject:
   - 95: {fileID: 1441072085}
   m_Layer: 0
   m_Name: Door028
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48430,7 +48442,7 @@ GameObject:
   - 64: {fileID: 1512324295}
   m_Layer: 0
   m_Name: Wall005
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -49763,6 +49775,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: f94314435e484f34aab9da62faee45c3, type: 3}
+--- !u!114 &1567830777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1567830774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9095f297ad6dfbe458029801728d5268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 0}
 --- !u!1 &1571391567
 GameObject:
   m_ObjectHideFlags: 0
@@ -51287,7 +51311,7 @@ GameObject:
   - 64: {fileID: 1615977185}
   m_Layer: 0
   m_Name: Wall017
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -51930,7 +51954,7 @@ GameObject:
   - 64: {fileID: 1625725840}
   m_Layer: 0
   m_Name: Wall031
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -53074,7 +53098,7 @@ GameObject:
   - 64: {fileID: 1672481131}
   m_Layer: 0
   m_Name: Wall011
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -54169,7 +54193,7 @@ GameObject:
   - 64: {fileID: 1714156724}
   m_Layer: 0
   m_Name: Wall033
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -56114,7 +56138,7 @@ GameObject:
   - 64: {fileID: 1751859831}
   m_Layer: 0
   m_Name: Wall016
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -56198,7 +56222,7 @@ GameObject:
   - 64: {fileID: 1752235554}
   m_Layer: 0
   m_Name: Wall004
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -57201,7 +57225,7 @@ GameObject:
   - 64: {fileID: 1788008006}
   m_Layer: 0
   m_Name: Wall023
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -60134,7 +60158,7 @@ GameObject:
   - 64: {fileID: 1872470577}
   m_Layer: 0
   m_Name: Wall017 (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -61719,7 +61743,7 @@ MonoBehaviour:
   isBoss: 0
   health: 1000
   deductHealth: 0
-  player: {fileID: 0}
+  collision: 0
   state: 0
   waypoints:
   - {fileID: 1859668093}
@@ -62005,7 +62029,7 @@ GameObject:
   - 64: {fileID: 1945872015}
   m_Layer: 0
   m_Name: Wall026
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -62395,7 +62419,7 @@ GameObject:
   - 64: {fileID: 1959001451}
   m_Layer: 0
   m_Name: Wall021
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -64391,7 +64415,7 @@ GameObject:
   - 64: {fileID: 2015116016}
   m_Layer: 0
   m_Name: Wall014
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -64759,14 +64783,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5d6f99819645848930b367645197ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _switch: {fileID: 8300000, guid: b7a3bcdfbc210bd45be0d0038ba6c7d4, type: 3}
   _lowPowerIntensityMode: 3
   _lowPowerSpotAngle: 40
   _lowPowerRange: 20
-  _highPowerIntensityMode: 50
+  _highPowerIntensityMode: 30
   _highPowerSpotAngle: 20
   _highPowerRange: 30
   _lowDrainBatterySpeed: 2.5
-  _highDrainBatterySpeed: 5
+  _highDrainBatterySpeed: 10
   _batteryBarLength: 0
   _modeChange: 0
   _maxFlickerSpeed: 1
@@ -64787,6 +64812,80 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_PrefabInternal: {fileID: 1864053668}
+--- !u!82 &2021373481
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2021373477}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &2021858354
 GameObject:
   m_ObjectHideFlags: 0
@@ -64885,7 +64984,7 @@ GameObject:
   - 64: {fileID: 2027275372}
   m_Layer: 0
   m_Name: Wall017 (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -67010,7 +67109,7 @@ GameObject:
   - 64: {fileID: 2096031928}
   m_Layer: 0
   m_Name: Wall007
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
@@ -67094,7 +67193,7 @@ GameObject:
   - 64: {fileID: 2096967472}
   m_Layer: 0
   m_Name: Wall003
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8

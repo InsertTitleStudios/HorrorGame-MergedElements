@@ -12,6 +12,7 @@ TagManager:
   - Waypoint
   - Small Enemy
   - Large Enemy
+  - Wall
   layers:
   - Default
   - TransparentFX

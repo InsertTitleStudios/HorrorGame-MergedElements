@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class Flashlight : MonoBehaviour
 {
     private Light flashlight;
-    //public AudioClip _switch;
+    public AudioClip _switch;
+   // public AudioClip _switchOff;
     // public AudioClip _batteryPickUp;
 
     public static int _maximumBatteryPower = 150;
@@ -60,7 +61,8 @@ public class Flashlight : MonoBehaviour
     {
         batteryPower.text = " " + _currentBatteryPower;
         if (Input.GetButtonDown("Flashlight"))
-        { //GetComponent<AudioSource>().PlayOneShot(_switch);
+        {
+            GetComponent<AudioSource>().PlayOneShot(_switch);
             flashlight.enabled = !flashlight.enabled;
             Debug.Log("Activated");
             if (dead && _currentBatteryPower <= 0)
@@ -70,14 +72,14 @@ public class Flashlight : MonoBehaviour
             if (pause && _currentBatteryPower <= 50)
             {
                 flashlight.enabled = false;
-                StopCoroutine("FlashlightModifier");
-                //flicker = false;
-                //Flicker();
+                flicker = false;
+                Flicker();
                 pause = false;
             }
         }
         if (flashlight.enabled)
         {
+            
             FlashlightOn();
             PowerCheck();
             batteryPower.text = " " + _currentBatteryPower;
@@ -102,20 +104,14 @@ public class Flashlight : MonoBehaviour
     {
         if (dying)
         {
-            Debug.Log("Dying");
-            pause = true;
-            StartCoroutine("FlashlightModifier"); 
-            //flicker = true;         
-            //Flicker();
+            pause = true;        
+            flicker = true;         
         }
         else
         {
-            Debug.Log("Living");
-            StopCoroutine("FlashlightModifier");
-            //flicker = false;
-            //Flicker();
+            flicker = false;
         }
-        //Flicker();
+        Flicker();
     }
     private void ModeCheck()
     {
@@ -135,14 +131,13 @@ public class Flashlight : MonoBehaviour
         dying = false;
         Debug.Log("Dead is: " + dead);
         flashlight.enabled = false;
-        StopCoroutine("FlashlightModifier");
-        //flicker = false;
-        //Flicker();
+        flicker = false;
+        Flicker();
         _lowIntensityBeam.gameObject.SetActive(false);
         _highIntensityBeam.gameObject.SetActive(false);
         _currentBatteryPower = 0;
     }
-   /* private void Flicker()
+    private void Flicker()
     {
         if (flicker)
         {
@@ -152,10 +147,7 @@ public class Flashlight : MonoBehaviour
         {
             StopCoroutine("FlashlightModifier");
         }
-
-    }*/
-
-
+    }
     private void PowerCheck()
     {
         if (_currentBatteryPower < 50)
@@ -163,14 +155,16 @@ public class Flashlight : MonoBehaviour
             dying = true;
             Dying();
         }
-        else if (_currentBatteryPower > 50)
+        if (_currentBatteryPower > 50)
         {
             dying = false;
             Dying();
         }
-        else if (_currentBatteryPower <= 0)
+        if (_currentBatteryPower < 0) // Only works if IF statment not Else IF statement
         {
+            Debug.Log("I'm in this statement");
             dead = true;
+            _currentBatteryPower = 0;
             Dead();
         }
     }
@@ -230,6 +224,5 @@ public class Flashlight : MonoBehaviour
         //{ GetComponent<AudioSource>().clip = _batteryPickUp;
         //  GetComponent<AudioSource>().Play(); }}
     }
-
     
 }

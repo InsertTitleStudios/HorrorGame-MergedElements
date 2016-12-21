@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public bool isBoss = false;
         public int health = 1000;
         public bool deductHealth = false;
-        public KillPlayer player;
+        public bool collision = false;
         public enum State
         {
             PATROL,
@@ -161,28 +161,34 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             if (isBoss == true)
             {
-                if (coll.tag == "HighBeam")
+                if (collision)
                 {
-                    state = AISight.State.STUNNED;
-                }
-                else
-                {
-                    state = AISight.State.PATROL;
+                    if (coll.tag == "HighBeam")
+                    {
+                        state = AISight.State.STUNNED;
+                    }
+                    else
+                    {
+                        state = AISight.State.PATROL;
+                    }
                 }
             }
 
             else if (isBoss == false)
             {
-                if (coll.tag == "LowBeam")
+                if (collision)
                 {
-                    deductHealth = true;
+                    if (coll.tag == "LowBeam")
+                    {
+                        deductHealth = true;
 
-                    
-                }
-                else if (coll.tag == "HighBeam")
-                {
-                    health = 0;
-                    Destroy(gameObject);
+
+                    }
+                    else if (coll.tag == "HighBeam")
+                    {
+                        health = 0;
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
