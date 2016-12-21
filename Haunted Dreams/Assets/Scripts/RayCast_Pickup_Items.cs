@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RayCast_Pickup_Items : MonoBehaviour
 {
-    private float range = 500f;
+    private float range = 50f;
     public GameObject _HandImage;
     public GameObject _CrossHairImage;
     public Camera cam;
@@ -18,55 +18,29 @@ public class RayCast_Pickup_Items : MonoBehaviour
         _HandImage.SetActive(false);
         beamCollission = FindObjectOfType<AISight>();
     }
-    void Update()
+    public void FixedUpdate()
     {
-        
-
-        /*
-
-            if (Physics.Raycast(ray, out  (transform.forward + transform.right).normalized, out hit, sightDist))
-            {
-                if (hit.collider.gameObject.tag == "Player")
-                {
-                    state = AISight.State.CHASE;
-                    target = hit.collider.gameObject;
-                }
-            }
-            Debug.DrawRay(ray.origin, ray.direction, Color.green);
-            if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
-            {
-                hitEnemy = true;
-                if (flashlight_is_on)
-                {
-                    beamCollission.collision = true;
-                }
-                else
-                {
-                    beamCollission.collision = false;
-                }
-            }
-            else if (hit.collider.tag != "Small Enemy" || hit.collider.tag != "Large Enemy")
-            {
-                hitEnemy = false;
-            }
-            */
         RaycastHit hit;
-        Ray ray = cam.ViewportPointToRay(new Vector2(.5f, .5f));
+        Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
 
-        if (Physics.Raycast(ray, out hit, range))
+        Debug.DrawRay(ray.origin, (ray.direction + transform.forward).normalized * range, Color.green);
+        Debug.DrawRay(ray.origin, (ray.direction + transform.forward + transform.right).normalized * range, Color.green);
+        Debug.DrawRay(ray.origin, (ray.direction + transform.forward - transform.right).normalized * range, Color.green);
+
+        if (Physics.Raycast(ray.origin, ray.direction + transform.forward, out hit, range))
         {
-
             if (canHover == true)
             {
                 if (hit.collider.tag == "Matchbox" || hit.collider.tag == "Battery")
                 {
                     _HandImage.SetActive(true);
                     _CrossHairImage.SetActive(false);
+                    Debug.Log("Hit match");
 
                     if (Input.GetButton("Fire1"))
                     {
                         if (hit.collider.tag == "Matchbox")
-                        {
+                        {                            
                             hit.collider.gameObject.GetComponent<PickUpMatches>().AddMatch();
                             canHover = false;
                             _HandImage.SetActive(false);
@@ -88,9 +62,55 @@ public class RayCast_Pickup_Items : MonoBehaviour
                     _HandImage.SetActive(false);
                     _CrossHairImage.SetActive(true);
                 }
-
+            }
+            if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
+            {
+                hitEnemy = true;
+                
+            }
+            else if (hit.collider.tag != "Small Enemy" || hit.collider.tag != "Large Enemy")
+            {
+                hitEnemy = false;
             }
         }
-    }    
-}
+        if (Physics.Raycast(ray.origin, ray.direction + (transform.forward + transform.right).normalized, out hit, range))
+        {
+            if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
+            {
+                hitEnemy = true;
+            }
+            else if (hit.collider.tag != "Small Enemy" || hit.collider.tag != "Large Enemy")
+            {
+                hitEnemy = false;
+            }
+        }
+        if (Physics.Raycast(ray.origin, ray.direction + (transform.forward - transform.right).normalized, out hit, range))
+        {
+            if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
+            {
+                hitEnemy = true;
+            }
+            else if (hit.collider.tag != "Small Enemy" || hit.collider.tag != "Large Enemy")
+            {
+                hitEnemy = false;
+            }
+        }
+        EnemyHit();       
+    }
 
+    public void EnemyHit()
+    {
+        if (hitEnemy)
+        {
+            if (flashlight_is_on)
+            {
+                beamCollission.collision = true;
+            }
+            else
+            {
+                beamCollission.collision = false;
+            }
+        }
+    }
+
+}
