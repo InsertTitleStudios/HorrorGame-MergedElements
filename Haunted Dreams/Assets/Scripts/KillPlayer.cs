@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillPlayer : MonoBehaviour {
-
+public class KillPlayer : MonoBehaviour
+{
     public LevelManager levelManager;
     public int playerHealth = 250;
     private int smallEnemyDamage = 1;
@@ -10,19 +10,27 @@ public class KillPlayer : MonoBehaviour {
 
     void Start()
     {
-        levelManager = FindObjectOfType<LevelManager>(); }
-	
-	void Update ()
-    { if (playerHealth <= 0)
-        { playerHealth = 0;
-          levelManager.RespawnPlayer();
-          playerHealth = 250; }}
+        levelManager = FindObjectOfType<LevelManager>();
+    }
 
-    void OnCollisionStay(Collision other) //Fix Collision - Doesn't work however health function works when done manually
-    { if (other.gameObject.tag =="Small Enemy")
-        { print("enemy just touched" + playerHealth);
-          playerHealth -= smallEnemyDamage; }
-
-     if (other.gameObject.tag == "Large Enemy")
-        { print("enemy just touched" + playerHealth);
-          playerHealth -= largeEnemyDamage; }}}
+    void Update()
+    {
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+            levelManager.RespawnPlayer();
+            playerHealth = 250;
+        }
+    }
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.tag == "Small Enemy")
+        {
+            playerHealth -= smallEnemyDamage;
+        }
+        if (other.gameObject.tag == "Large Enemy")
+        {
+            playerHealth -= largeEnemyDamage;
+        }
+    }
+}

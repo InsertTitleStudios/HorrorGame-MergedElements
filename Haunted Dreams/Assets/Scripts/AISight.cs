@@ -1,247 +1,257 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.ThirdPerson;
 
-
-namespace UnityStandardAssets.Characters.ThirdPerson
+public class AISight : MonoBehaviour
 {
-    public class AISight : MonoBehaviour
+    public NavMeshAgent agent;
+    public ThirdPersonCharacter character;
+
+    public bool isBoss = false;
+    public int health = 1000;
+    public bool deductHealth = false;
+    public bool collision = false;
+    public enum State
     {
-        public NavMeshAgent agent;
-        public ThirdPersonCharacter character;
+        PATROL,
+        CHASE,
+        INVESTIGATE,
+        STUNNED
+    }
 
-        public bool isBoss = false;
-        public int health = 1000;
-        public bool deductHealth = false;
-        public bool collision = false;
-        public enum State
+    public State state;
+    private bool alive;
+
+    //Var for Patrolling
+    public GameObject[] waypoints;
+    private int waypointInd;
+    public float patrolSpeed = 0.5f;
+
+    public bool isRandom;
+
+    //Var for Chasing
+    public float chaseSpeed = 1f;
+    public GameObject target;
+
+    //Var for Investigating
+    private Vector3 investigateSpot;
+    private float timer = 0;
+    public float investigateWait = 10;
+    public bool flashlight_is_on;
+
+    //Var for Sight
+    public float heightMultiplier;
+    public float sightDist = 10;
+
+    // Use this for initialization
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        character = GetComponent<ThirdPersonCharacter>();
+        target = GameObject.FindGameObjectWithTag("Player");
+
+        agent.updatePosition = true;
+        agent.updateRotation = false;
+
+        if (isRandom == true)
         {
-            PATROL,
-            CHASE,
-            INVESTIGATE,
-            STUNNED
+            waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
+            waypointInd = Random.Range(0, waypoints.Length);
         }
-
-        public State state;
-        private bool alive;
-
-        //Var for Patrolling
-        public GameObject[] waypoints;
-        private int waypointInd;
-        public float patrolSpeed = 0.5f;
-
-        public bool isRandom;
-
-        //Var for Chasing
-        public float chaseSpeed = 1f;
-        public GameObject target;
-
-        //Var for Investigating
-        private Vector3 investigateSpot;
-        private float timer = 0;
-        public float investigateWait = 10;
-
-        //Var for Sight
-        public float heightMultiplier;
-        public float sightDist = 10;
-
-        // Use this for initialization
-        void Start()
+        else
         {
-            agent = GetComponent<NavMeshAgent>();
-            character = GetComponent<ThirdPersonCharacter>();
-            target = GameObject.FindGameObjectWithTag("Player");
+            waypointInd = 0;
+        }
+        state = AISight.State.PATROL;
 
-            agent.updatePosition = true;
-            agent.updateRotation = false;
+        alive = true;
 
+        heightMultiplier = 1.36f;
+        StartCoroutine("FSM");
+    }
+    IEnumerator FSM()
+    {
+        while (alive)
+        {
+            switch (state)
+            {
+                case State.PATROL:
+                    Patrol();
+                    break;
+
+                case State.CHASE:
+                    Chase();
+                    break;
+
+                case State.INVESTIGATE:
+                    Investigate();
+                    break;
+
+                case State.STUNNED:
+                    Stunned();
+                    break;
+            }
+            yield return null;
+        }
+    }
+    void Patrol()
+    {
+        agent.speed = patrolSpeed;
+        if (Vector3.Distance(this.transform.position, waypoints[waypointInd].transform.position) >= 2)
+        {
+            agent.SetDestination(waypoints[waypointInd].transform.position);
+            character.Move(agent.desiredVelocity, false, false);
+        }
+        else if (Vector3.Distance(this.transform.position, waypoints[waypointInd].transform.position) <= 2)
+        {
             if (isRandom == true)
             {
-                waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
                 waypointInd = Random.Range(0, waypoints.Length);
             }
             else
             {
-                waypointInd = 0;
-            }
-            state = AISight.State.PATROL;
-
-            alive = true;
-
-            heightMultiplier = 1.36f;
-            StartCoroutine("FSM");
-        }
-        IEnumerator FSM()
-        {
-            while (alive)
-            {
-                switch (state)
+                waypointInd++;
+                if (waypointInd >= waypoints.Length)
                 {
-                    case State.PATROL:
-                        Patrol();
-                        break;
-
-                    case State.CHASE:
-                        Chase();
-                        break;
-
-                    case State.INVESTIGATE:
-                        Investigate();
-                        break;
-
-                    case State.STUNNED:
-                        Stunned();
-                        break;
+                    waypointInd = 0;
                 }
-                yield return null;
             }
         }
-        void Patrol()
+        else
         {
-            agent.speed = patrolSpeed;
-            if (Vector3.Distance(this.transform.position, waypoints[waypointInd].transform.position) >= 2)
+            character.Move(Vector3.zero, false, false);
+        }
+    }
+
+    void Chase()
+    {
+        agent.speed = chaseSpeed;
+        agent.SetDestination(target.transform.position);
+        character.Move(agent.desiredVelocity, false, false);
+    }
+
+    void Investigate()
+    {
+        timer += Time.deltaTime;
+        agent.SetDestination(this.transform.position);
+        character.Move(Vector3.zero, false, false);
+        transform.LookAt(investigateSpot);
+        if (timer >= investigateWait)
+        {
+            state = AISight.State.PATROL;
+            timer = 0;
+        }
+    }
+
+    void Stunned()
+    {
+        character.Move(Vector3.zero, false, false); ;
+    }
+
+    void OnTriggerEnter(Collider coll)
+    {
+       if (coll.tag == "Player")
+        {
+            state = AISight.State.INVESTIGATE;
+            investigateSpot = coll.gameObject.transform.position;
+
+        }
+
+        if (isBoss == true)
+        {
+
+            if (collision)
             {
-                agent.SetDestination(waypoints[waypointInd].transform.position);
-                character.Move(agent.desiredVelocity, false, false);
-            }
-            else if (Vector3.Distance(this.transform.position, waypoints[waypointInd].transform.position) <= 2)
-            {
-                if (isRandom == true)
+
+                if (coll.tag == "HighBeam")
                 {
-                    waypointInd = Random.Range(0, waypoints.Length);
+                    state = AISight.State.STUNNED;
                 }
                 else
                 {
-                    waypointInd++;
-                    if (waypointInd >= waypoints.Length)
-                    {
-                        waypointInd = 0;
-                    }
-                }
-            }
-            else
-            {
-                character.Move(Vector3.zero, false, false);
-            }
-        }
-
-        void Chase()
-        {
-            agent.speed = chaseSpeed;
-            agent.SetDestination(target.transform.position);
-            character.Move(agent.desiredVelocity, false, false);
-        }
-
-        void Investigate()
-        {
-            timer += Time.deltaTime;
-            agent.SetDestination(this.transform.position);
-            character.Move(Vector3.zero, false, false);
-            transform.LookAt(investigateSpot);
-            if (timer >= investigateWait)
-            {
-                state = AISight.State.PATROL;
-                timer = 0;
-            }          
-        }
-
-        void Stunned()
-        {
-            character.Move(Vector3.zero, false, false); ;
-        }
-
-        void OnTriggerEnter(Collider coll)
-        {
-
-            if (coll.tag == "Player")
-            {
-                state = AISight.State.INVESTIGATE;
-                investigateSpot = coll.gameObject.transform.position;
-              
-            }
-
-            if (isBoss == true)
-            {
-                if (collision)
-                {
-                    if (coll.tag == "HighBeam")
-                    {
-                        state = AISight.State.STUNNED;
-                    }
-                    else
-                    {
-                        state = AISight.State.PATROL;
-                    }
-                }
-            }
-
-            else if (isBoss == false)
-            {
-                if (collision)
-                {
-                    if (coll.tag == "LowBeam")
-                    {
-                        deductHealth = true;
-
-
-                    }
-                    else if (coll.tag == "HighBeam")
-                    {
-                        health = 0;
-                        Destroy(gameObject);
-                    }
+                    state = AISight.State.PATROL;
                 }
             }
         }
 
-        void FixedUpdate()
+        else if (isBoss == false)
         {
-            RaycastHit hit;
-
-            Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, transform.forward * sightDist, Color.green);
-            Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized * sightDist, Color.green);
-            Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized * sightDist, Color.green);
-
-            if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, transform.forward, out hit, sightDist))
+            print("Collision is: " + collision + "Flashlight is also turned on.");
+            if (collision)
             {
-                if (hit.collider.gameObject.tag == "Player")
-                {
-                    state = AISight.State.CHASE;
-                    target = hit.collider.gameObject;
-                }
-            }
-
-            if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized, out hit, sightDist))
-            {
-                if (hit.collider.gameObject.tag == "Player")
-                {
-                    state = AISight.State.CHASE;
-                    target = hit.collider.gameObject;
-                }
-            }
-
-            if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized, out hit, sightDist))
-            {
-                if (hit.collider.gameObject.tag == "Player")
-                {
-                    state = AISight.State.CHASE;
-                    target = hit.collider.gameObject;
-                }
-            }
-
-            if (deductHealth)
-            {
-                health--;
-
                 
-                if (health <= 0)
+                
+                if (coll.tag == "LowBeam")
                 {
-                    print("Deducting health" + health);
+                    print("Collission with low beam: ");
+                    deductHealth = true;
+
+
+                }
+                if (coll.tag == "HighBeam")
+                {
+                    print("Collission with: high beam ");
                     health = 0;
                     Destroy(gameObject);
                 }
-            }
 
+                else
+                {
+                    Debug.Log("No Collision");
+                    deductHealth = false;
+                }
+            }
         }
+    }
+
+    void FixedUpdate()
+    {
+        RaycastHit hit;
+
+        Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, transform.forward * sightDist, Color.green);
+        Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized * sightDist, Color.green);
+        Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized * sightDist, Color.green);
+
+        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, transform.forward, out hit, sightDist))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                state = AISight.State.CHASE;
+                target = hit.collider.gameObject;
+            }
+        }
+
+        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized, out hit, sightDist))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                state = AISight.State.CHASE;
+                target = hit.collider.gameObject;
+            }
+        }
+
+        if (Physics.Raycast(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized, out hit, sightDist))
+        {
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                state = AISight.State.CHASE;
+                target = hit.collider.gameObject;
+            }
+        }
+
+        if (deductHealth)
+        {
+            health--;
+
+
+            if (health <= 0)
+            {
+                print("Deducting health" + health);
+                health = 0;
+                Destroy(gameObject);
+            }
+        }
+
     }
 }
 

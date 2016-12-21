@@ -12228,18 +12228,6 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: f8c534650a78bab44bf9946282f1a5d2, type: 3}
---- !u!114 &410152432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 410152429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9095f297ad6dfbe458029801728d5268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
 --- !u!1001 &410749691
 Prefab:
   m_ObjectHideFlags: 0
@@ -19040,8 +19028,8 @@ Transform:
   - {fileID: 126140031}
   - {fileID: 1118145424}
   - {fileID: 1566778749}
-  m_Father: {fileID: 1780230117}
-  m_RootOrder: 108
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1 &643133009
 GameObject:
   m_ObjectHideFlags: 0
@@ -20970,7 +20958,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400064, guid: cbcae94403f89df4e9becf4dbf3ceca1, type: 3}
       propertyPath: m_RootOrder
-      value: 113
+      value: 109
       objectReference: {fileID: 0}
     - target: {fileID: 400064, guid: cbcae94403f89df4e9becf4dbf3ceca1, type: 3}
       propertyPath: m_LocalScale.y
@@ -22389,7 +22377,7 @@ RectTransform:
   m_Children:
   - {fileID: 495251568}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 14
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -30060,8 +30048,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2000636124}
-  m_Father: {fileID: 1780230117}
-  m_RootOrder: 107
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &983434440
 GameObject:
   m_ObjectHideFlags: 0
@@ -34664,8 +34652,8 @@ Transform:
   - {fileID: 1367277933}
   - {fileID: 171128792}
   - {fileID: 308390803}
-  m_Father: {fileID: 1780230117}
-  m_RootOrder: 109
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
 --- !u!1 &1177136402
 GameObject:
   m_ObjectHideFlags: 0
@@ -34947,7 +34935,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
   m_Children: []
   m_Father: {fileID: 1780230117}
-  m_RootOrder: 114
+  m_RootOrder: 110
 --- !u!23 &1177936177
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -36959,8 +36947,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 413615692}
-  m_Father: {fileID: 1780230117}
-  m_RootOrder: 110
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1 &1242396050
 GameObject:
   m_ObjectHideFlags: 0
@@ -39314,7 +39302,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 15
 --- !u!1 &1303668039
 GameObject:
   m_ObjectHideFlags: 0
@@ -49775,18 +49763,6 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: f94314435e484f34aab9da62faee45c3, type: 3}
---- !u!114 &1567830777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1567830774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9095f297ad6dfbe458029801728d5268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
 --- !u!1 &1571391567
 GameObject:
   m_ObjectHideFlags: 0
@@ -53323,7 +53299,7 @@ RectTransform:
   - {fileID: 1215219313}
   - {fileID: 1662925939}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 16
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -57105,10 +57081,6 @@ Transform:
   - {fileID: 884020517}
   - {fileID: 1862877160}
   - {fileID: 259681705}
-  - {fileID: 982874203}
-  - {fileID: 642244017}
-  - {fileID: 1171698109}
-  - {fileID: 1238305922}
   - {fileID: 1845347585}
   - {fileID: 2112459653}
   - {fileID: 728464754}
@@ -57850,7 +57822,7 @@ RectTransform:
   - {fileID: 595411552}
   - {fileID: 777155252}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 13
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -59186,7 +59158,7 @@ Transform:
   - {fileID: 2013792987}
   - {fileID: 1762015594}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 17
 --- !u!1 &1836874630
 GameObject:
   m_ObjectHideFlags: 0
@@ -59447,7 +59419,7 @@ Transform:
   - {fileID: 1533133518}
   - {fileID: 386481782}
   m_Father: {fileID: 1780230117}
-  m_RootOrder: 111
+  m_RootOrder: 107
 --- !u!1 &1845864569
 GameObject:
   m_ObjectHideFlags: 0
@@ -60131,7 +60103,11 @@ MonoBehaviour:
   _HandImage: {fileID: 1007167487}
   _CrossHairImage: {fileID: 316651270}
   cam: {fileID: 1864053670}
+  beamCollission: {fileID: 0}
+  flashlight_is_on: 0
   canHover: 0
+  hitEnemy: 0
+  collectSound: {fileID: 8300000, guid: 6d0674f872217a4449eef0581f658da5, type: 3}
 --- !u!65 &1864053678
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61744,16 +61720,17 @@ MonoBehaviour:
   health: 1000
   deductHealth: 0
   collision: 0
-  state: 0
+  state: 3
   waypoints:
   - {fileID: 1859668093}
   - {fileID: 2013792986}
   - {fileID: 1762015593}
-  patrolSpeed: 5.92
+  patrolSpeed: 0
   isRandom: 0
-  chaseSpeed: 5
+  chaseSpeed: 0
   target: {fileID: 1864053669}
   investigateWait: 10
+  flashlight_is_on: 0
   heightMultiplier: 1.36
   sightDist: 10
 --- !u!1 &1937120416
@@ -61844,7 +61821,7 @@ RectTransform:
   - {fileID: 1007167488}
   - {fileID: 316651271}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -64793,21 +64770,21 @@ MonoBehaviour:
   _lowDrainBatterySpeed: 2.5
   _highDrainBatterySpeed: 10
   _batteryBarLength: 0
-  _modeChange: 0
   _maxFlickerSpeed: 1
   _minFlickerSpeed: 0.1
-  respawn: 0
   manager: {fileID: 1302094270}
   checkpointActivated: 0
-  batteryPower: {fileID: 777155253}
   _lowIntensityBeam: {fileID: 1567830774}
+  casting: {fileID: 0}
   _highIntensityBeam: {fileID: 410152429}
   fillAmount: 0
   battery: {fileID: 595411553}
-  pause: 0
-  dead: 0
-  dying: 0
+  _modeChange: 0
+  _pause: 0
+  _batteryDead: 0
+  _batteryDying: 0
   flicker: 0
+  respawn: 0
 --- !u!4 &2021373480 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -67408,7 +67385,7 @@ Transform:
   - {fileID: 349190376}
   - {fileID: 1199858989}
   m_Father: {fileID: 1780230117}
-  m_RootOrder: 112
+  m_RootOrder: 108
 --- !u!1 &2116612363
 GameObject:
   m_ObjectHideFlags: 0
