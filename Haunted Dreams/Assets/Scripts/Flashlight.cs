@@ -33,7 +33,7 @@ public class Flashlight : MonoBehaviour
     
     public LevelManager manager;
     public bool checkpointActivated = false;
-    public Text batteryPower;
+  //  public Text batteryPower;
 
     public GameObject _lowIntensityBeam;
     public GameObject _highIntensityBeam;
@@ -57,16 +57,15 @@ public class Flashlight : MonoBehaviour
         _currentBatteryPower = _maximumBatteryPower;
         _tempBatteryPower = _currentBatteryPower;
         battery.fillAmount = _currentBatteryPower;
-        batteryPower.text = " " + _currentBatteryPower;
+     //   batteryPower.text = " " + _currentBatteryPower;
     }
     void Update()
     {
-        batteryPower.text = " " + _currentBatteryPower;
+     //   batteryPower.text = " " + _currentBatteryPower;
         if (Input.GetButtonDown("Flashlight"))
         {
             GetComponent<AudioSource>().PlayOneShot(_switch);
             flashlight.enabled = !flashlight.enabled;
-            Debug.Log("Activated");
             if (_batteryDead && _currentBatteryPower <= 0)
             {
                 Dead();
@@ -84,7 +83,7 @@ public class Flashlight : MonoBehaviour
             
             FlashlightOn();
             PowerCheck();
-            batteryPower.text = " " + _currentBatteryPower;
+           // batteryPower.text = " " + _currentBatteryPower;
             if (checkpointActivated == true)
             {
                 _tempBatteryPower = _currentBatteryPower;
@@ -129,9 +128,7 @@ public class Flashlight : MonoBehaviour
     }
     private void Dead()
     {
-        Debug.Log("In Dead Method");
         _batteryDying = false;
-        Debug.Log("Dead is: " + _batteryDead);
         flashlight.enabled = false;
         flicker = false;
         Flicker();
@@ -164,7 +161,6 @@ public class Flashlight : MonoBehaviour
         }
         if (_currentBatteryPower < 0) // Only works if IF statment not Else IF statement
         {
-            Debug.Log("I'm in this statement");
             _batteryDead = true;
             _currentBatteryPower = 0;
             Dead();
@@ -220,7 +216,7 @@ public class Flashlight : MonoBehaviour
         {
             _currentBatteryPower = _maximumBatteryPower;
             battery.fillAmount = _currentBatteryPower;
-            batteryPower.text = " " + _currentBatteryPower;
+        //    batteryPower.text = " " + _currentBatteryPower;
         }
         // if (_batteryPickUp != null)
         //{ GetComponent<AudioSource>().clip = _batteryPickUp;
