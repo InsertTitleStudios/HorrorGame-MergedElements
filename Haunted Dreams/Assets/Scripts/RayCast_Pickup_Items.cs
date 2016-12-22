@@ -11,6 +11,8 @@ public class RayCast_Pickup_Items : MonoBehaviour
     public bool flashlight_is_on = false;
     public bool canHover = false;
     public bool hitEnemy = false;
+    private int rayAngle = 15;
+    private int segements = 5;  
     public AudioClip collectSound;
     void Start()
     {
@@ -21,13 +23,40 @@ public class RayCast_Pickup_Items : MonoBehaviour
     public void FixedUpdate()
     {
         RaycastHit hit;
-        Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
+        Ray ray = cam.ViewportPointToRay(new Vector2(.5f, .5f));
 
-        Debug.DrawRay(ray.origin, (ray.direction + transform.forward).normalized * range, Color.green);
-        Debug.DrawRay(ray.origin, (ray.direction + transform.forward + transform.right).normalized * range, Color.green);
-        Debug.DrawRay(ray.origin, (ray.direction + transform.forward - transform.right).normalized * range, Color.green);
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = Vector3.zero;
 
-        if (Physics.Raycast(ray.origin, ray.direction + transform.forward, out hit, range))
+    //    int startAngle = int.Parse(-rayAngle * (0.5f);
+       // int finishAngle = rayAngle * 2;
+
+      //  int increment = rayAngle / segements;
+
+     //   for (int i = startAngle; i < finishAngle; i += increment)
+     //   {
+     //       targetPos = (Quaternion.Euler(0f, i, 0f) * transform.forward).normalized * range;
+
+
+        //    if (Physics.Raycast(startPos, targetPos, out hit))
+        //    {
+        //        Debug.Log("Hit: " + hit.collider.gameObject.name);
+        //    }
+        //    Debug.DrawRay(startPos, targetPos, Color.red);
+        //}
+
+
+        // if (Physics.Raycast(transform.position, hit, (ray.direction + transform.forward).normalized, range))
+
+
+        // ^ this is for sweeping raycast for enemy detection this is combined with flashlight model to create detection
+        // If sweeping raycast hits an enemy collider then it will set bool hitEnemy to true.
+        // If hitEnemy == true then beamcollision = true; else beamCollision = false;
+        // V This is  is for single raycast picking up object
+
+        EnemyHit();
+
+        if (Physics.Raycast(ray, out hit, range))
         {
             if (canHover == true)
             {
@@ -40,7 +69,7 @@ public class RayCast_Pickup_Items : MonoBehaviour
                     if (Input.GetButton("Fire1"))
                     {
                         if (hit.collider.tag == "Matchbox")
-                        {                            
+                        {
                             hit.collider.gameObject.GetComponent<PickUpMatches>().AddMatch();
                             canHover = false;
                             _HandImage.SetActive(false);
@@ -63,45 +92,19 @@ public class RayCast_Pickup_Items : MonoBehaviour
                     _CrossHairImage.SetActive(true);
                 }
             }
-            if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
-            {
-                hitEnemy = true;
-                
-            }
-            else if (hit.collider.tag != "Small Enemy" || hit.collider.tag != "Large Enemy")
-            {
-                hitEnemy = false;
-            }
         }
-        if (Physics.Raycast(ray.origin, ray.direction + (transform.forward + transform.right).normalized, out hit, range))
-        {
-            if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
-            {
-                hitEnemy = true;
-            }
-            else if (hit.collider.tag != "Small Enemy" || hit.collider.tag != "Large Enemy")
-            {
-                hitEnemy = false;
-            }
-        }
-        if (Physics.Raycast(ray.origin, ray.direction + (transform.forward - transform.right).normalized, out hit, range))
-        {
-            if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
-            {
-                hitEnemy = true;
-            }
-            else if (hit.collider.tag != "Small Enemy" || hit.collider.tag != "Large Enemy")
-            {
-                hitEnemy = false;
-            }
-        }
-        EnemyHit();       
+        
+
     }
+
+
 
     public void EnemyHit()
     {
+       
         if (hitEnemy)
         {
+          //  Debug.Log("I'm in this method");
             if (flashlight_is_on)
             {
                 beamCollission.collision = true;
@@ -112,5 +115,5 @@ public class RayCast_Pickup_Items : MonoBehaviour
             }
         }
     }
-
+        
 }

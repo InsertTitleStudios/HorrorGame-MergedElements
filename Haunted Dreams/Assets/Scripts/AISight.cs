@@ -8,7 +8,7 @@ public class AISight : MonoBehaviour
     public ThirdPersonCharacter character;
 
     public bool isBoss = false;
-    public int health = 1000;
+    public float health = 1000f;
     public bool deductHealth = false;
     public bool collision = false;
     public enum State
@@ -179,12 +179,13 @@ public class AISight : MonoBehaviour
             print("Collision is: " + collision + "Flashlight is also turned on.");
             if (collision)
             {
-                
-                
+
+
                 if (coll.tag == "LowBeam")
                 {
                     print("Collission with low beam: ");
                     deductHealth = true;
+
 
 
                 }
@@ -192,14 +193,15 @@ public class AISight : MonoBehaviour
                 {
                     print("Collission with: high beam ");
                     health = 0;
-                    Destroy(gameObject);
-                }
 
-                else
+
+                }
+                if (coll.tag != "LowBeam")
                 {
                     Debug.Log("No Collision");
                     deductHealth = false;
                 }
+                Health();
             }
         }
     }
@@ -207,6 +209,8 @@ public class AISight : MonoBehaviour
     void FixedUpdate()
     {
         RaycastHit hit;
+
+        
 
         Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, transform.forward * sightDist, Color.green);
         Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized * sightDist, Color.green);
@@ -239,20 +243,26 @@ public class AISight : MonoBehaviour
             }
         }
 
+       
+    }
+
+    public void Health()
+    {
         if (deductHealth)
         {
             health--;
-
-
-            if (health <= 0)
-            {
-                print("Deducting health" + health);
-                health = 0;
-                Destroy(gameObject);
-            }
         }
 
+
+        if (health <= 0)
+        {
+            print("Deducting health" + health);
+            health = 0;
+            Destroy(gameObject);
+        }
     }
+
+    
 }
 
 
