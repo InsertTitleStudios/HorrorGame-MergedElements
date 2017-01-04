@@ -176,7 +176,7 @@ public class AISight : MonoBehaviour
 
         else if (isBoss == false)
         {
-            print("Collision is: " + collision + "Flashlight is also turned on.");
+          //  print("Collision is: " + collision + "Flashlight is also turned on.");
             if (collision)
             {
 

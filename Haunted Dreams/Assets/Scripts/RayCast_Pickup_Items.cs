@@ -28,26 +28,6 @@ public class RayCast_Pickup_Items : MonoBehaviour
         Vector3 startPos = transform.position;
         Vector3 targetPos = Vector3.zero;
 
-    //    int startAngle = int.Parse(-rayAngle * (0.5f);
-       // int finishAngle = rayAngle * 2;
-
-      //  int increment = rayAngle / segements;
-
-     //   for (int i = startAngle; i < finishAngle; i += increment)
-     //   {
-     //       targetPos = (Quaternion.Euler(0f, i, 0f) * transform.forward).normalized * range;
-
-
-        //    if (Physics.Raycast(startPos, targetPos, out hit))
-        //    {
-        //        Debug.Log("Hit: " + hit.collider.gameObject.name);
-        //    }
-        //    Debug.DrawRay(startPos, targetPos, Color.red);
-        //}
-
-
-        // if (Physics.Raycast(transform.position, hit, (ray.direction + transform.forward).normalized, range))
-
 
         // ^ this is for sweeping raycast for enemy detection this is combined with flashlight model to create detection
         // If sweeping raycast hits an enemy collider then it will set bool hitEnemy to true.
@@ -96,8 +76,6 @@ public class RayCast_Pickup_Items : MonoBehaviour
         
 
     }
-
-
 
     public void EnemyHit()
     {
