@@ -60221,9 +60221,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 10
-  _angle: 45
+  fov: 45
+  cam: {fileID: 1864053670}
+  angle: 0
   segments: 30
   enemyHit: 0
+  angleTemp: 0
+  changeDirection: 0
 --- !u!65 &1864053678
 BoxCollider:
   m_ObjectHideFlags: 0

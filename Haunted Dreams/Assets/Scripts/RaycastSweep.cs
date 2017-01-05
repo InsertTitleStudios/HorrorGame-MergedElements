@@ -5,7 +5,9 @@ public class RaycastSweep : MonoBehaviour
 {
 
     public float distance = 10f;
-    public int _angle = 360;
+    public float fov = 45;
+    public Camera cam;
+    public float angle;
     //Changes the spread of raycasts
     public int segments = 30;
     //Segments equals number of lines however incorrect number of segments showing for lines
@@ -15,33 +17,44 @@ public class RaycastSweep : MonoBehaviour
     private int startAngle;
     private int finishAngle;
     private int increment;
+    public int angleTemp;
+
+    public bool changeDirection = false;
 
     void Start()
     {
 
-        startPos = transform.position;
+        
         targetPos = Vector3.zero;
 
-        startAngle = (int)(-_angle * 0.5);
-        finishAngle = (int)(_angle * 0.5);
+        //startAngle = (int)(-_angle * 0.5);
+        //finishAngle = (int)(_angle * 0.5);
 
-        increment = (int)(_angle / segments);
+        //        increment = (int)(_angle / segments);
         StartCoroutine("RaySonar");
     }
 
     IEnumerator RaySonar()
     {
         while (true)
-        {
-            RaycastHit hit;
-            for (int i = startAngle; i <= finishAngle; i += increment)
+        {          
+            for (int i = -segments; i < segments; i++)
             {
+                RaycastHit hit;
+                Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0, 0.5f));
 
-                Debug.Log("i = " + i);
-                yield return new WaitForSeconds(0.0005f);
-                targetPos = (Quaternion.Euler(0, i, 0) * transform.forward).normalized * distance;
+                float segmentIndex = Mathf.Abs(i);
+                //Debug.Log("i = " + segmentIndex);
 
-                if (Physics.Raycast(startPos, targetPos, out hit))
+                angle = Mathf.Lerp(-fov / 2, fov / 2, segmentIndex / segments);
+
+                Debug.Log(angle);
+
+                yield return null;
+
+                targetPos = (Quaternion.Euler(0, angle, 0) * transform.forward).normalized * distance;
+
+                if (Physics.Raycast(ray.origin, targetPos, out hit))
                 {
                     if (hit.collider.tag == "Small Enemy")
                     {
@@ -53,18 +66,19 @@ public class RaycastSweep : MonoBehaviour
                         enemyHit = false;
                     }
                 }
-
-                if (i == finishAngle)
-                {
-                    increment = -(int)(_angle / segments);
-                }
-                Debug.DrawRay(startPos, targetPos, Color.red);
+                Debug.DrawRay(ray.origin, targetPos, Color.red);
             }
-            
         }
-             
     }
 }
+
+
+
+
+
+
+
+
 
 
 
