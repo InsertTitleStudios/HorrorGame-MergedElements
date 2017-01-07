@@ -154,7 +154,6 @@ public class AISight : MonoBehaviour
         {
             state = AISight.State.INVESTIGATE;
             investigateSpot = coll.gameObject.transform.position;
-
         }
 
         if (isBoss == true)
@@ -179,28 +178,26 @@ public class AISight : MonoBehaviour
           //  print("Collision is: " + collision + "Flashlight is also turned on.");
             if (collision)
             {
-
-
                 if (coll.tag == "LowBeam")
                 {
                     print("Collission with low beam: ");
                     deductHealth = true;
-
-
-
                 }
                 if (coll.tag == "HighBeam")
                 {
                     print("Collission with: high beam ");
                     health = 0;
-
-
                 }
-                if (coll.tag != "LowBeam")
+
+                else if (coll.tag != "LowBeam" || coll.tag != "HighBeam")
                 {
-                    Debug.Log("No Collision");
                     deductHealth = false;
                 }
+                /* if (coll.tag != "LowBeam")
+                 {
+                     Debug.Log("No Collision");
+                   //  deductHealth = false;
+                 }*/
                 Health();
             }
         }

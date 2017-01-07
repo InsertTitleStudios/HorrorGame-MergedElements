@@ -23619,7 +23619,7 @@ ParticleSystem:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 780384728}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -23657,12 +23657,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 1744979868
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: 1744979868
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -45847,7 +45848,7 @@ ParticleSystem:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1491423292}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -45885,12 +45886,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 1744979868
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: 1744979868
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -60165,6 +60167,14 @@ Prefab:
       propertyPath: m_JumpSpeed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: firstPerson
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
   m_IsPrefabParent: 0
@@ -60201,33 +60211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5cf9c46814c68f4d92e2c757d600c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashlight_is_on: 0
+  canHover: 0
   _HandImage: {fileID: 1007167487}
   _CrossHairImage: {fileID: 316651270}
   cam: {fileID: 1864053670}
   beamCollission: {fileID: 0}
-  flashlight_is_on: 0
-  canHover: 0
-  hitEnemy: 0
   collectSound: {fileID: 8300000, guid: 6d0674f872217a4449eef0581f658da5, type: 3}
---- !u!114 &1864053673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1864053669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75454d29140598a42be1c0cdc795a36f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 10
-  fov: 45
-  cam: {fileID: 1864053670}
-  angle: 0
-  segments: 30
   enemyHit: 0
-  angleTemp: 0
-  changeDirection: 0
 --- !u!65 &1864053678
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65050,7 +65041,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
