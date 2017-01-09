@@ -13,12 +13,14 @@ public class RayCast_Pickup_Items : MonoBehaviour
     public Camera cam;
     public AISight beamCollission;
     public AudioClip collectSound;
+    public bool boolBeOn = false;
+    public bool rangeMode;
 
     //Sonar Raycast Variables
-    private float sonarRange = 5f; //Range of sonar raycast
-    private float fov = 15f; //Angle of sonar
+    private float sonarRange = 10f; //Range of sonar raycast
+    private float fov = 10f; //Angle of sonar
     private float angle;
-    private int segments = 30; //Number of raycast lines
+    private int segments = 10; //Number of raycast lines
     private Vector3 targetPos;
     public bool enemyHit = false;
 
@@ -43,19 +45,34 @@ public class RayCast_Pickup_Items : MonoBehaviour
                 angle = Mathf.Lerp(-fov / 2, fov / 2, segmentIndex / segments);
                 yield return null;
                 targetPos = (Quaternion.Euler(0, angle, 0) * transform.forward).normalized * sonarRange;
-                if (Physics.Raycast(sonar.origin, targetPos, out hit))
+
+                if (rangeMode)
+                {
+                    sonarRange = 14f;
+                }
+                else if (!rangeMode)
+                {
+                    sonarRange = 10f;
+                }
+
+                if (Physics.Raycast(sonar.origin, targetPos, out hit, sonarRange))
                 {
                     if (hit.collider.tag == "Small Enemy")
                     {
-                        Debug.Log("Enemy");
+                       // Debug.Log("Enemy");
                         enemyHit = true;
+                        EnemyHit();
                     }
-                    else if (hit.collider.tag == "Wall")
+
+                    if (hit.collider.tag == "Large Enemy")
                     {
-                        enemyHit = false;
-                        Debug.Log("Wall");
+                        enemyHit = true;
+                        EnemyHit();
                     }
-                    EnemyHit();
+
+                    enemyHit = false;
+
+                    
                 }
                 Debug.DrawRay(sonar.origin, targetPos, Color.red, 0.5f);
             }
@@ -105,26 +122,49 @@ public class RayCast_Pickup_Items : MonoBehaviour
                 }
             }
         }
-        
-
     }
 
     public void EnemyHit()
     {
-       
-        if (enemyHit)
+        print(enemyHit);
+
+        if (flashlight_is_on)
         {
-          //  Debug.Log("I'm in this method");
-            if (flashlight_is_on)
+            //  Debug.Log("Hitting enemy I'll set collission to true");
+
+
+            
+            if (enemyHit)
             {
+                print(beamCollission.collision);
                 beamCollission.collision = true;
+                boolBeOn = true;
+                //  Debug.Log("I'm in this method");
+
+
             }
-            else
+            if (!enemyHit)
             {
+                //Debug.Log("Not hitting enemy so I'll turn off");
                 beamCollission.deductHealth = false;
                 beamCollission.collision = false;
+                boolBeOn = false;
             }
+
         }
+        if (!flashlight_is_on)
+        {
+            //Debug.Log("hitting enemy but light not on. I'll turn off collission");
+            beamCollission.deductHealth = false;
+            beamCollission.collision = false;
+            boolBeOn = false;
+        }
+
+        
+        //   else
+        //  {
+        // 
+        // }
     }
         
 }

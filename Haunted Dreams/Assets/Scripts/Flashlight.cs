@@ -37,22 +37,20 @@ public class Flashlight : MonoBehaviour
 
     public Text amountText;
 
-
-
     public GameObject _lowIntensityBeam;
 
     public RayCast_Pickup_Items casting;
     public GameObject _highIntensityBeam;
-    
+
     public bool _modeChange = false;
     public bool _pause = false;
     public bool _batteryDead = false;
     public bool _batteryDying = false;
     public bool flicker = false;
     public bool respawn = false;
+    public RayCast_Pickup_Items mode;
 
     public Image currentBatteryPower;
-
 
    /* private void Awake()
     {
@@ -73,6 +71,7 @@ public class Flashlight : MonoBehaviour
       //  batteryPower.MaxVal = _currentBatteryPower;
        // batteryPower.CurrentVal = _currentBatteryPower;
         _tempBatteryPower = _currentBatteryPower;
+        mode = FindObjectOfType<RayCast_Pickup_Items>();
         casting = FindObjectOfType<RayCast_Pickup_Items>();
     }
     void Update()
@@ -81,6 +80,8 @@ public class Flashlight : MonoBehaviour
         {
             GetComponent<AudioSource>().PlayOneShot(_switch);
             flashlight.enabled = !flashlight.enabled;
+            
+            //casting.flashlight_is_on = flashlight;
             if (_batteryDead && _currentBatteryPower <= 0)
             {
                 Dead();
@@ -92,16 +93,18 @@ public class Flashlight : MonoBehaviour
                 Flicker();
                 _pause = false;
             }
+            if (checkpointActivated == true)
+            {
+                _tempBatteryPower = _currentBatteryPower;
+            }
+
         }
         if (flashlight.enabled)
         {
             casting.flashlight_is_on = true;
             FlashlightOn();
             PowerCheck();
-            if (checkpointActivated == true)
-            {
-                _tempBatteryPower = _currentBatteryPower;
-            }
+           
             ModeCheck();
         }
         else if (!flashlight.enabled)
@@ -187,7 +190,7 @@ public class Flashlight : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && !_modeChange)
         {
-            
+            mode.rangeMode = true;
             _modeChange = true;
             flashlight.intensity = _highPowerIntensityMode;
             flashlight.spotAngle = _highPowerSpotAngle;
@@ -197,6 +200,7 @@ public class Flashlight : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(1) && _modeChange)
         {
+            mode.rangeMode = false;
             _modeChange = false;
             flashlight.intensity = _lowPowerIntensityMode;
             flashlight.spotAngle = _lowPowerSpotAngle;

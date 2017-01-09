@@ -31,6 +31,12 @@ public class Checkpoint : MonoBehaviour
                 {
                     match.checkpointActivated = true;
                 }
+
+                foreach(BatteryPickUp battery in levelManager.tempPickedUpBatteries)
+                {
+                    battery.checkpointActivated = true;
+
+                }
                 matches_text.text = "X " + _currentMatches;
             }
             else if (_currentMatches <= 0)

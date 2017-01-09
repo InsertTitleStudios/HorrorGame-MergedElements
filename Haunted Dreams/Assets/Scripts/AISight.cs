@@ -175,7 +175,7 @@ public class AISight : MonoBehaviour
 
         else if (isBoss == false)
         {
-          //  print("Collision is: " + collision + "Flashlight is also turned on.");
+            //  print("Collision is: " + collision + "Flashlight is also turned on.");
             if (collision)
             {
                 if (coll.tag == "LowBeam")
@@ -188,27 +188,27 @@ public class AISight : MonoBehaviour
                     print("Collission with: high beam ");
                     health = 0;
                 }
+                Health();
+            }
 
-                else if (coll.tag != "LowBeam" || coll.tag != "HighBeam")
-                {
-                    deductHealth = false;
-                }
+            else if (!collision)
+            {
+                deductHealth = false;
+                collision = false;
+            }
                 /* if (coll.tag != "LowBeam")
                  {
                      Debug.Log("No Collision");
                    //  deductHealth = false;
                  }*/
-                Health();
-            }
+                
+            
         }
     }
 
     void FixedUpdate()
     {
         RaycastHit hit;
-
-        
-
         Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, transform.forward * sightDist, Color.green);
         Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward + transform.right).normalized * sightDist, Color.green);
         Debug.DrawRay(transform.position + Vector3.up * heightMultiplier, (transform.forward - transform.right).normalized * sightDist, Color.green);
