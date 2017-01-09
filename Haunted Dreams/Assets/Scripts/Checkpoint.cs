@@ -10,9 +10,11 @@ public class Checkpoint : MonoBehaviour
     public Text matches_text; 
     public LevelManager levelManager;
     public bool respawn = false;
+    public Flashlight activated;
     void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
+        activated = FindObjectOfType<Flashlight>();
         matches_text.text = "X " + _currentMatches;
         tempMatches = _currentMatches;
     }
@@ -27,6 +29,7 @@ public class Checkpoint : MonoBehaviour
                 gameObject.GetComponentInChildren<Light>().enabled = true;
                 _currentMatches--;
                 tempMatches = _currentMatches;
+                activated.checkpointActivated = true;
                 foreach (PickUpMatches match in levelManager.tempPickedUpMatches)
                 {
                     match.checkpointActivated = true;

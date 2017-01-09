@@ -9,7 +9,8 @@ public class Flashlight : MonoBehaviour
 
     public static int _maximumBatteryPower = 1050;
     public static float _currentBatteryPower = 0f;
-    public static float _tempBatteryPower = 0f;
+    
+    public float _tempBatteryPower = 0f;
 
     public float _lowPowerIntensityMode = 3f;
     public float _lowPowerSpotAngle = 40f;
@@ -28,7 +29,10 @@ public class Flashlight : MonoBehaviour
     public float _maxFlickerSpeed = 1f;
     public float _minFlickerSpeed = 0.1f;
 
-    
+    public Text batteryText;
+    public Text tempbatteryText;
+
+
     public LevelManager manager;
     public bool checkpointActivated = false;
 
@@ -66,11 +70,15 @@ public class Flashlight : MonoBehaviour
         _lowIntensityBeam.gameObject.SetActive(false);
         _highIntensityBeam.gameObject.SetActive(false);
         flashlight.enabled = false;
+
         
+         
         _currentBatteryPower = _maximumBatteryPower;
-      //  batteryPower.MaxVal = _currentBatteryPower;
-       // batteryPower.CurrentVal = _currentBatteryPower;
-        _tempBatteryPower = _currentBatteryPower;
+        //  batteryPower.MaxVal = _currentBatteryPower;
+        // batteryPower.CurrentVal = _currentBatteryPower;
+        _tempBatteryPower = _maximumBatteryPower;
+        
+        tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
         mode = FindObjectOfType<RayCast_Pickup_Items>();
         casting = FindObjectOfType<RayCast_Pickup_Items>();
     }
@@ -92,31 +100,43 @@ public class Flashlight : MonoBehaviour
                 flicker = false;
                 Flicker();
                 _pause = false;
-            }
-            if (checkpointActivated == true)
-            {
-                _tempBatteryPower = _currentBatteryPower;
-            }
-
+            }          
         }
         if (flashlight.enabled)
         {
             casting.flashlight_is_on = true;
+            batteryText.text = "Battery Power: " + _currentBatteryPower;
             FlashlightOn();
             PowerCheck();
+            CheckpointCheck();
            
             ModeCheck();
         }
         else if (!flashlight.enabled)
         {
             casting.flashlight_is_on = false;
-            FlashlightOff();           
+            FlashlightOff();
+            CheckpointCheck();           
         }
+        
+
         if (respawn == true)
         {
             _currentBatteryPower = _tempBatteryPower;
-           // batteryPower.CurrentVal = _tempBatteryPower;
+            batteryText.text = "Battery Power: " + _currentBatteryPower;
+            tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
+            // batteryPower.CurrentVal = _tempBatteryPower;
             respawn = false;
+        }
+    }
+    
+    private void CheckpointCheck()
+    {
+        if (checkpointActivated == true)
+        {
+            batteryText.text = "Battery Power: " + _currentBatteryPower;
+            tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
+            _tempBatteryPower = _currentBatteryPower;
         }
     }  
     private void Dying()
