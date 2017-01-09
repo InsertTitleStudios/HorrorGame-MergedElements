@@ -23764,7 +23764,7 @@ ParticleSystem:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 780384728}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -23802,12 +23802,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 1744979868
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: 1744979868
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -40883,7 +40884,6 @@ GameObject:
   - 4: {fileID: 1341983531}
   - 33: {fileID: 1341983535}
   - 23: {fileID: 1341983534}
-  - 65: {fileID: 1341983532}
   m_Layer: 0
   m_Name: doorframe
   m_TagString: Untagged
@@ -40905,18 +40905,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1780230117}
   m_RootOrder: 16
---- !u!65 &1341983532
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1341983530}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.0073762, y: 2.5436878, z: 0.5724972}
-  m_Center: {x: -1.46, y: 1.2718439, z: 0.24030189}
 --- !u!23 &1341983534
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -46214,7 +46202,7 @@ ParticleSystem:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1491423292}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -46252,12 +46240,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 1744979868
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: 1744979868
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -59629,7 +59618,7 @@ Transform:
   - {fileID: 403294995}
   - {fileID: 1592860388}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
 --- !u!1 &1836874630
 GameObject:
   m_ObjectHideFlags: 0
@@ -61561,7 +61550,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
 --- !u!1 &1913138043
 GameObject:
   m_ObjectHideFlags: 0
