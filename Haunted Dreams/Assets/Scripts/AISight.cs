@@ -186,7 +186,7 @@ public class AISight : MonoBehaviour
                 if (coll.tag == "LowBeam")
                 {
                     print("Collission with low beam: ");
-                    deductHealth = true;
+                 //   deductHealth = true;
                 }
                 if (coll.tag == "HighBeam")
                 {
@@ -196,18 +196,17 @@ public class AISight : MonoBehaviour
                 Health();
             }
 
-            else if (!collision)
-            {
-                deductHealth = false;
-                collision = false;
-            }
-                /* if (coll.tag != "LowBeam")
-                 {
-                     Debug.Log("No Collision");
-                   //  deductHealth = false;
-                 }*/
-                
-            
+
+           // deductHealth = false;
+           // collision = false;
+
+            /* if (coll.tag != "LowBeam")
+             {
+                 Debug.Log("No Collision");
+               //  deductHealth = false;
+             }*/
+
+
         }
     }
 

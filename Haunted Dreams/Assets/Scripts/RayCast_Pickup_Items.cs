@@ -117,7 +117,7 @@ public class RayCast_Pickup_Items : MonoBehaviour
 
     public void EnemyHit()
     {
-        print(enemyHit);
+        Debug.Log(enemyHit);
 
         if (flashlight_is_on)
         {
@@ -137,7 +137,7 @@ public class RayCast_Pickup_Items : MonoBehaviour
             if (!enemyHit)
             {
                 //Debug.Log("Not hitting enemy so I'll turn off");
-                beamCollission.deductHealth = false;
+             //   beamCollission.deductHealth = false;
                 beamCollission.collision = false;
                 boolBeOn = false;
             }
@@ -146,7 +146,7 @@ public class RayCast_Pickup_Items : MonoBehaviour
         if (!flashlight_is_on)
         {
             //Debug.Log("hitting enemy but light not on. I'll turn off collission");
-            beamCollission.deductHealth = false;
+        //    beamCollission.deductHealth = false;
             beamCollission.collision = false;
             boolBeOn = false;
         }

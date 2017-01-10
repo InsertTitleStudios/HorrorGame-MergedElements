@@ -54,6 +54,7 @@ public class Flashlight : MonoBehaviour
     public bool flicker = false;
     public bool respawn = false;
     public RayCast_Pickup_Items mode;
+  //  public Slider _BatteryBar;
 
     
 
@@ -67,7 +68,7 @@ public class Flashlight : MonoBehaviour
         _lowIntensityBeam.gameObject.SetActive(false);
         _highIntensityBeam.gameObject.SetActive(false);
         flashlight.enabled = false;
-        UpdateBatteryBar();
+      //  UpdateBatteryBar();
         
          
         _currentBatteryPower = _maximumBatteryPower;
@@ -76,17 +77,17 @@ public class Flashlight : MonoBehaviour
         _tempBatteryPower = _currentBatteryPower;
         
         tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
-        batteryText.text = "Temp Battery power: " + _currentBatteryPower;
+        batteryText.text = "Battery power: " + _currentBatteryPower;
         mode = FindObjectOfType<RayCast_Pickup_Items>();
         casting = FindObjectOfType<RayCast_Pickup_Items>();
     }
 
-    private void UpdateBatteryBar()
+  /*  private void UpdateBatteryBar()
     {
         float ratio = _currentBatteryPower / _maximumBatteryPower;
         currentBatteryPower.rectTransform.localScale = new Vector3(ratio, 1, 1);
         amountText.text = (ratio * 100).ToString() + '%';
-    }
+    }*/
     void Update()
     {
         if (Input.GetButtonDown("Flashlight"))
@@ -128,6 +129,7 @@ public class Flashlight : MonoBehaviour
         {
             flashlight.enabled = false;
             _currentBatteryPower = _tempBatteryPower;
+          //  _BatteryBar.value = _currentBatteryPower;
             batteryText.text = "Battery Power: " + _currentBatteryPower;
             tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
             // batteryPower.CurrentVal = _tempBatteryPower;
@@ -142,6 +144,7 @@ public class Flashlight : MonoBehaviour
             batteryText.text = "Battery Power: " + _currentBatteryPower;
             
             _tempBatteryPower = _currentBatteryPower;
+           // _BatteryBar.value = _currentBatteryPower;
             tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
             Debug.Log("_tempBatteryPower = " + _tempBatteryPower);
             
@@ -167,14 +170,16 @@ public class Flashlight : MonoBehaviour
         {
             _lowIntensityBeam.gameObject.SetActive(true);
             _currentBatteryPower -= _lowDrainBatterySpeed * Time.deltaTime;
+       //     _BatteryBar.value = _currentBatteryPower;
          //   batteryPower.CurrentVal -= _lowDrainBatterySpeed;
         }
         else if (_modeChange)
         {
             _currentBatteryPower -= _highDrainBatterySpeed * Time.deltaTime;
+         //   _BatteryBar.value = _currentBatteryPower;
           //  batteryPower.CurrentVal -= _highDrainBatterySpeed;
         }
-        UpdateBatteryBar();
+      //  UpdateBatteryBar();
     }
     private void Dead()
     {
@@ -264,21 +269,22 @@ public class Flashlight : MonoBehaviour
     public void AddBattery(int _batteryPowerAmount)
     {
         _currentBatteryPower += _batteryPowerAmount;
+      //  _BatteryBar.value = _currentBatteryPower;
        // batteryPower.CurrentVal += _batteryPowerAmount;
         if (_currentBatteryPower >= _maximumBatteryPower)
         {
             _currentBatteryPower = _maximumBatteryPower;
             
         }
-        UpdateBatteryBar();
+      //  UpdateBatteryBar();
     }
-/*
+
     private void UpdateBatteryHud()
     {
         float ratio = _currentBatteryPower / _maximumBatteryPower;
         currentBatteryPower.rectTransform.localScale = new Vector3(ratio, 1, 1);
         amountText.text = (ratio * 100).ToString() + '%';
     }
-    */
+    
     
 }
