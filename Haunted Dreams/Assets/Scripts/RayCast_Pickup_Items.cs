@@ -57,23 +57,14 @@ public class RayCast_Pickup_Items : MonoBehaviour
 
                 if (Physics.Raycast(sonar.origin, targetPos, out hit, sonarRange))
                 {
-                    if (hit.collider.tag == "Small Enemy")
+                    if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
                     {
                        // Debug.Log("Enemy");
                         enemyHit = true;
                         EnemyHit();
                     }
-
-                    if (hit.collider.tag == "Large Enemy")
-                    {
-                        enemyHit = true;
-                        EnemyHit();
-                    }
-
-                    enemyHit = false;
-
-                    
                 }
+                enemyHit = false;
                 Debug.DrawRay(sonar.origin, targetPos, Color.red, 0.5f);
             }
         }

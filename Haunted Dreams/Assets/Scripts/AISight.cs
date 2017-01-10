@@ -135,7 +135,9 @@ public class AISight : MonoBehaviour
         timer += Time.deltaTime;
         agent.SetDestination(this.transform.position);
         character.Move(Vector3.zero, false, false);
+        
         transform.LookAt(investigateSpot);
+      
         if (timer >= investigateWait)
         {
             state = AISight.State.PATROL;

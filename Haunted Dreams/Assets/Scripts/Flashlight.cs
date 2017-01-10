@@ -137,7 +137,6 @@ public class Flashlight : MonoBehaviour
     
     private void CheckpointCheck()
     {
-        Debug.Log("Checkpoint Activated is: " + checkpointActivated);
         if (checkpointActivated == true)
         {
             batteryText.text = "Battery Power: " + _currentBatteryPower;
