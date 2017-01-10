@@ -10,7 +10,7 @@ public class Flashlight : MonoBehaviour
     public static int _maximumBatteryPower = 1050;
     public static float _currentBatteryPower = 0f;
     
-    public float _tempBatteryPower = 0f;
+    public static float _tempBatteryPower = 0f;
 
     public float _lowPowerIntensityMode = 3f;
     public float _lowPowerSpotAngle = 40f;
@@ -40,6 +40,7 @@ public class Flashlight : MonoBehaviour
    // private Stat batteryPower;
 
     public Text amountText;
+    public Image currentBatteryPower;
 
     public GameObject _lowIntensityBeam;
 
@@ -54,33 +55,37 @@ public class Flashlight : MonoBehaviour
     public bool respawn = false;
     public RayCast_Pickup_Items mode;
 
-    public Image currentBatteryPower;
+    
 
-   /* private void Awake()
-    {
-        
-    }*/
     void Start()
     {
      //   batteryPower.Initialize();
-        UpdateBatteryHud();
+      //  UpdateBatteryHud();
         flashlight = GetComponentInChildren<Light>();
         _lowIntensityBeam.GetComponent<GameObject>();
         _highIntensityBeam.GetComponent<GameObject>();
         _lowIntensityBeam.gameObject.SetActive(false);
         _highIntensityBeam.gameObject.SetActive(false);
         flashlight.enabled = false;
-
+        UpdateBatteryBar();
         
          
         _currentBatteryPower = _maximumBatteryPower;
         //  batteryPower.MaxVal = _currentBatteryPower;
         // batteryPower.CurrentVal = _currentBatteryPower;
-        _tempBatteryPower = _maximumBatteryPower;
+        _tempBatteryPower = _currentBatteryPower;
         
         tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
+        batteryText.text = "Temp Battery power: " + _currentBatteryPower;
         mode = FindObjectOfType<RayCast_Pickup_Items>();
         casting = FindObjectOfType<RayCast_Pickup_Items>();
+    }
+
+    private void UpdateBatteryBar()
+    {
+        float ratio = _currentBatteryPower / _maximumBatteryPower;
+        currentBatteryPower.rectTransform.localScale = new Vector3(ratio, 1, 1);
+        amountText.text = (ratio * 100).ToString() + '%';
     }
     void Update()
     {
@@ -118,10 +123,10 @@ public class Flashlight : MonoBehaviour
             FlashlightOff();
             CheckpointCheck();           
         }
-        
-
+       
         if (respawn == true)
         {
+            flashlight.enabled = false;
             _currentBatteryPower = _tempBatteryPower;
             batteryText.text = "Battery Power: " + _currentBatteryPower;
             tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
@@ -132,12 +137,17 @@ public class Flashlight : MonoBehaviour
     
     private void CheckpointCheck()
     {
+        Debug.Log("Checkpoint Activated is: " + checkpointActivated);
         if (checkpointActivated == true)
         {
             batteryText.text = "Battery Power: " + _currentBatteryPower;
-            tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
+            
             _tempBatteryPower = _currentBatteryPower;
+            tempbatteryText.text = "Temp Battery power: " + _tempBatteryPower;
+            Debug.Log("_tempBatteryPower = " + _tempBatteryPower);
+            
         }
+        checkpointActivated = false;
     }  
     private void Dying()
     {
@@ -165,6 +175,7 @@ public class Flashlight : MonoBehaviour
             _currentBatteryPower -= _highDrainBatterySpeed * Time.deltaTime;
           //  batteryPower.CurrentVal -= _highDrainBatterySpeed;
         }
+        UpdateBatteryBar();
     }
     private void Dead()
     {
@@ -260,14 +271,15 @@ public class Flashlight : MonoBehaviour
             _currentBatteryPower = _maximumBatteryPower;
             
         }
+        UpdateBatteryBar();
     }
-
+/*
     private void UpdateBatteryHud()
     {
         float ratio = _currentBatteryPower / _maximumBatteryPower;
         currentBatteryPower.rectTransform.localScale = new Vector3(ratio, 1, 1);
         amountText.text = (ratio * 100).ToString() + '%';
     }
-
+    */
     
 }
