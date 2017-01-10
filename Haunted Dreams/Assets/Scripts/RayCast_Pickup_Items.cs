@@ -3,10 +3,9 @@ using System.Collections;
 
 public class RayCast_Pickup_Items : MonoBehaviour
 {
-
     //Pick up objects Raycast Variables
     private float pickRange = 50f;
-    public bool flashlight_is_on = false;
+    public bool flashlight_is_on;
     public bool canHover = false;
     public GameObject _HandImage;
     public GameObject _CrossHairImage;
@@ -22,7 +21,7 @@ public class RayCast_Pickup_Items : MonoBehaviour
     private float angle;
     private int segments = 10; //Number of raycast lines
     private Vector3 targetPos;
-    public bool enemyHit = false;
+    public bool enemyHit;
 
     void Start()
     {
@@ -32,7 +31,6 @@ public class RayCast_Pickup_Items : MonoBehaviour
         targetPos = Vector3.zero;
         StartCoroutine("RaySonar");
     }
-
     IEnumerator RaySonar()
     {
         while (true)
@@ -45,31 +43,30 @@ public class RayCast_Pickup_Items : MonoBehaviour
                 angle = Mathf.Lerp(-fov / 2, fov / 2, segmentIndex / segments);
                 yield return null;
                 targetPos = (Quaternion.Euler(0, angle, 0) * transform.forward).normalized * sonarRange;
-
-                if (rangeMode)
-                {
-                    sonarRange = 14f;
-                }
-                else if (!rangeMode)
-                {
-                    sonarRange = 10f;
-                }
-
-                if (Physics.Raycast(sonar.origin, targetPos, out hit, sonarRange))
+                  if (rangeMode)
+                  {
+                      sonarRange = 14f;
+                  }
+                  else if (!rangeMode)
+                  {
+                      sonarRange = 10f;
+                  }                  
+                if (Physics.Raycast(sonar.origin, targetPos, out hit, sonarRange, LayerMask.GetMask("Default")))
                 {
                     if (hit.collider.tag == "Small Enemy" || hit.collider.tag == "Large Enemy")
                     {
-                       // Debug.Log("Enemy");
                         enemyHit = true;
-                        EnemyHit();
                     }
+                    else
+                    {
+                        enemyHit = false;
+                    }
+                    EnemyHit();
                 }
-                enemyHit = false;
-                Debug.DrawRay(sonar.origin, targetPos, Color.red, 0.5f);
+                 Debug.DrawRay(sonar.origin, targetPos, Color.red, 0.5f);
             }
         }
     }
-
     void FixedUpdate()
     {
         RaycastHit hit;
@@ -84,8 +81,6 @@ public class RayCast_Pickup_Items : MonoBehaviour
                 {
                     _HandImage.SetActive(true);
                     _CrossHairImage.SetActive(false);
-                    Debug.Log("Hit match");
-
                     if (Input.GetButton("Fire1"))
                     {
                         if (hit.collider.tag == "Matchbox")
@@ -114,48 +109,23 @@ public class RayCast_Pickup_Items : MonoBehaviour
             }
         }
     }
-
     public void EnemyHit()
     {
-        Debug.Log(enemyHit);
-
-        if (flashlight_is_on)
+        if (enemyHit)
         {
-            //  Debug.Log("Hitting enemy I'll set collission to true");
-
-
-            
-            if (enemyHit)
+            if (flashlight_is_on)
             {
-                print(beamCollission.collision);
                 beamCollission.collision = true;
-                boolBeOn = true;
-                //  Debug.Log("I'm in this method");
-
-
+                beamCollission.deductHealth = true;
             }
-            if (!enemyHit)
+            else
             {
-                //Debug.Log("Not hitting enemy so I'll turn off");
-             //   beamCollission.deductHealth = false;
                 beamCollission.collision = false;
-                boolBeOn = false;
             }
-
         }
-        if (!flashlight_is_on)
+        else
         {
-            //Debug.Log("hitting enemy but light not on. I'll turn off collission");
-        //    beamCollission.deductHealth = false;
             beamCollission.collision = false;
-            boolBeOn = false;
         }
-
-        
-        //   else
-        //  {
-        // 
-        // }
     }
-        
 }

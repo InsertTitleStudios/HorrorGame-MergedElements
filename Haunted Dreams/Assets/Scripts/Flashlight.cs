@@ -53,7 +53,7 @@ public class Flashlight : MonoBehaviour
     public bool _batteryDying = false;
     public bool flicker = false;
     public bool respawn = false;
-    public RayCast_Pickup_Items mode;
+   public RayCast_Pickup_Items mode;
   //  public Slider _BatteryBar;
 
     
@@ -95,7 +95,7 @@ public class Flashlight : MonoBehaviour
             GetComponent<AudioSource>().PlayOneShot(_switch);
             flashlight.enabled = !flashlight.enabled;
             
-            //casting.flashlight_is_on = flashlight;
+            casting.flashlight_is_on = flashlight;
             if (_batteryDead && _currentBatteryPower <= 0)
             {
                 Dead();

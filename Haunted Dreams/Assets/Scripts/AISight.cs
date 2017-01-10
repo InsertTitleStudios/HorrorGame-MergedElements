@@ -186,14 +186,19 @@ public class AISight : MonoBehaviour
                 if (coll.tag == "LowBeam")
                 {
                     print("Collission with low beam: ");
-                 //   deductHealth = true;
+                    deductHealth = true;
                 }
                 if (coll.tag == "HighBeam")
                 {
                     print("Collission with: high beam ");
                     health = 0;
                 }
+                
                 Health();
+            }
+            else
+            {
+                deductHealth = false;
             }
 
 
