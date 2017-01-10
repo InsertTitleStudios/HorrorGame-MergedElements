@@ -94,6 +94,9 @@ public class AISight : MonoBehaviour
             yield return null;
         }
     }
+    //Need to fix AI stop angling on the side
+    // Need to fix AI investigating so it will chase player if it sees them in its range.
+    //Need to fix AI collission with flashlight
     void Patrol()
     {
         agent.speed = patrolSpeed;
