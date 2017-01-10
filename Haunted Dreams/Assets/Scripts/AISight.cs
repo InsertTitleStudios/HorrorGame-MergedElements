@@ -96,7 +96,6 @@ public class AISight : MonoBehaviour
     }
     //Need to fix AI stop angling on the side
     // Need to fix AI investigating so it will chase player if it sees them in its range.
-    //Need to fix AI collission with flashlight
     void Patrol()
     {
         agent.speed = patrolSpeed;
@@ -125,20 +124,17 @@ public class AISight : MonoBehaviour
             character.Move(Vector3.zero, false, false);
         }
     }
-
     void Chase()
     {
         agent.speed = chaseSpeed;
         agent.SetDestination(target.transform.position);
         character.Move(agent.desiredVelocity, false, false);
     }
-
     void Investigate()
     {
         timer += Time.deltaTime;
         agent.SetDestination(this.transform.position);
-        character.Move(Vector3.zero, false, false);
-        
+        character.Move(Vector3.zero, false, false);     
         transform.LookAt(investigateSpot);
       
         if (timer >= investigateWait)
@@ -147,12 +143,10 @@ public class AISight : MonoBehaviour
             timer = 0;
         }
     }
-
     void Stunned()
     {
         character.Move(Vector3.zero, false, false); ;
     }
-
     void OnTriggerEnter(Collider coll)
     {
        if (coll.tag == "Player")
@@ -160,13 +154,10 @@ public class AISight : MonoBehaviour
             state = AISight.State.INVESTIGATE;
             investigateSpot = coll.gameObject.transform.position;
         }
-
         if (isBoss == true)
         {
-
             if (collision)
             {
-
                 if (coll.tag == "HighBeam")
                 {
                     state = AISight.State.STUNNED;
@@ -177,10 +168,8 @@ public class AISight : MonoBehaviour
                 }
             }
         }
-
         else if (isBoss == false)
         {
-            //  print("Collision is: " + collision + "Flashlight is also turned on.");
             if (collision)
             {
                 if (coll.tag == "LowBeam")
@@ -200,18 +189,6 @@ public class AISight : MonoBehaviour
             {
                 deductHealth = false;
             }
-
-
-           // deductHealth = false;
-           // collision = false;
-
-            /* if (coll.tag != "LowBeam")
-             {
-                 Debug.Log("No Collision");
-               //  deductHealth = false;
-             }*/
-
-
         }
     }
 
@@ -258,17 +235,12 @@ public class AISight : MonoBehaviour
         {
             health--;
         }
-
-
         if (health <= 0)
         {
-            print("Deducting health" + health);
             health = 0;
             Destroy(gameObject);
         }
-    }
-
-    
+    }  
 }
 
 

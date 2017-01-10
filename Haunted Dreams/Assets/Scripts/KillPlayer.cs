@@ -6,7 +6,8 @@ public class KillPlayer : MonoBehaviour
     public LevelManager levelManager;
     public int playerHealth = 250;
     private int smallEnemyDamage = 1;
-    private int largeEnemyDamage = 250;
+    public bool smallDamage = false;
+    public bool largeDamage = false;
 
     void Start()
     {
@@ -22,15 +23,37 @@ public class KillPlayer : MonoBehaviour
             playerHealth = 250;
         }
     }
-    void OnCollisionStay(Collision other)
+
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Small Enemy")
+        if (other.tag == "Small Enemy")
         {
-            playerHealth -= smallEnemyDamage;
+            smallDamage = true;
+            Health();
+
         }
-        if (other.gameObject.tag == "Large Enemy")
+        if (other.tag == "Large Enemy")
         {
-            playerHealth -= largeEnemyDamage;
-        }
+            largeDamage = true;
+            Health();
+        }       
+        
+        
+        smallDamage = false;
+        largeDamage = false;
     }
+
+    public void Health()
+    {
+        if (smallDamage)
+        {
+            playerHealth-= smallEnemyDamage;
+        }
+        if (largeDamage)
+        {
+            playerHealth = 0;
+        }
+        
+    }
+    
 }
